@@ -46,9 +46,9 @@ Stabilize and professionalize the current educational graduates pipeline without
 
 ## Day 4 — Logging
 
-- [ ] Create logs directory
-- [ ] Configure basic logging
-- [ ] Generate first pipeline logs
+- [X] Create logs directory
+- [X] Configure basic logging
+- [X] Generate first pipeline logs
 
 ---
 

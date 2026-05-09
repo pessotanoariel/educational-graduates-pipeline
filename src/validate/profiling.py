@@ -1,5 +1,6 @@
 import pandas as pd
 from config.settings import RAW_DATA_DIR
+from src.utils.logger import logger
 
 # ==============================
 # Selección de archivo
@@ -25,7 +26,7 @@ path = RAW_DATA_DIR / archivo
 if not path.exists():
     raise FileNotFoundError(f"No se encontró el archivo en: {path}")
 
-print(f"Archivo seleccionado: {archivo}")
+logger.info(f"Archivo seleccionado: {archivo}")
 
 # ==============================
 # Carga del dataset
@@ -59,7 +60,7 @@ elif archivo.endswith(".csv"):
 else:
     raise ValueError(f"Formato de archivo no soportado: {archivo}")
 
-print("Archivo cargado correctamente ✔")
+logger.info("Archivo cargado correctamente")
 
 # ==============================
 # Profiling básico

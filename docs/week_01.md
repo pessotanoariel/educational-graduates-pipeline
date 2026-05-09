@@ -30,9 +30,9 @@ Stabilize and professionalize the current educational graduates pipeline without
 
 ## Day 2 — Git Initialization
 
-- [ ] Initialize Git repository
-- [ ] Create .gitignore
-- [ ] Remove unnecessary temporary files
+- [X] Initialize Git repository
+- [X] Create .gitignore
+- [X] Remove unnecessary temporary files
 
 ---
 

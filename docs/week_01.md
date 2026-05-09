@@ -38,8 +38,8 @@ Stabilize and professionalize the current educational graduates pipeline without
 
 ## Day 3 — Centralized Configuration
 
-- [ ] Create config/settings.py
-- [ ] Centralize all project paths
+- [X] Create config/settings.py
+- [X] Centralize all project paths
 - [ ] Remove hardcoded local paths
 
 ---

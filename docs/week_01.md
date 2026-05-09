@@ -52,11 +52,12 @@ Stabilize and professionalize the current educational graduates pipeline without
 
 ---
 
-## Day 5 — Initial Refactor
+## Day 5 — Initial Modular Refactor
 
-- [ ] Move reusable functions into src/
-- [ ] Separate extract and transform logic
-- [ ] Prepare first modular pipeline structure
+- [X] Create `src/extract/loaders.py`
+- [X] Move dataset loading logic from `profiling.py` to `loaders.py`
+- [X] Update `profiling.py` to use `load_dataset()`
+- [X] Run profiling successfully from module execution
 
 ---
 

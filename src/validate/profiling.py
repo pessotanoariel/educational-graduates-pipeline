@@ -1,6 +1,7 @@
 import pandas as pd
 from config.settings import RAW_DATA_DIR
 from src.utils.logger import logger
+from src.extract.loaders import load_dataset
 
 # ==============================
 # Selección de archivo
@@ -32,34 +33,7 @@ logger.info(f"Archivo seleccionado: {archivo}")
 # Carga del dataset
 # ==============================
 
-if archivo.endswith(".xlsx"):
-
-    # Caso especial: microcredenciales con múltiples hojas
-    if "microcredenciales_2026" in archivo:
-        xls = pd.ExcelFile(path)
-        sheet_ultima = xls.sheet_names[-1]
-        print(f"Procesando hoja: {sheet_ultima}")
-        df = pd.read_excel(path, sheet_name=sheet_ultima)
-    else:
-        df = pd.read_excel(path)
-
-elif archivo.endswith(".csv"):
-
-    # ENOF / SIENFO → separador ;
-    if "enof" in archivo or "sienfo" in archivo:
-        df = pd.read_csv(path, sep=";", dtype=str, low_memory=False)
-
-    # CFP (query SQL / DBeaver) → separador ,
-    elif "cfp" in archivo:
-        df = pd.read_csv(path, sep=",", dtype=str, low_memory=False)
-
-    # fallback (otros CSV)
-    else:
-        df = pd.read_csv(path, dtype=str, low_memory=False)
-
-else:
-    raise ValueError(f"Formato de archivo no soportado: {archivo}")
-
+df = load_dataset(path)
 logger.info("Archivo cargado correctamente")
 
 # ==============================

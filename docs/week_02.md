@@ -29,8 +29,8 @@ The focus of this week is not adding complexity, but improving automation, reusa
 
 ## Day 2 — Initial Data Quality Checks
 
-- [ ] Validate null values
-- [ ] Validate duplicate documents
+- [X] Validate null values
+- [X] Validate duplicate documents
 - [ ] Detect invalid document lengths
 - [ ] Log quality warnings
 

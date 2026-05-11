@@ -1,5 +1,5 @@
 def run_basic_profile(df):
-
+    """Display basic profiling information for a dataset."""
     print("\n=== INFO GENERAL ===")
     df.info()
 
@@ -10,7 +10,7 @@ def run_basic_profile(df):
     print(df.head())
 
 def generate_dataset_summary(df):
-
+    """"Generate basic dataset metadata summary."""
     summary = {
         "rows": len(df),
         "columns": len(df.columns),

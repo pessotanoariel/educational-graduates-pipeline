@@ -6,6 +6,10 @@ from src.validate.profiling_utils import (
     run_basic_profile,
     generate_dataset_summary
 )
+from src.validate.quality_checks import (
+    check_null_values,
+    check_duplicate_rows
+)
 
 # ==============================
 # Selección de archivo
@@ -52,3 +56,13 @@ print("\n=== DATASET SUMMARY ===")
 
 for key, value in summary.items():
     print(f"{key}: {value}")
+
+null_summary = check_null_values(df)
+
+print("\n=== NULL VALUES ===")
+print(null_summary)
+
+duplicate_rows = check_duplicate_rows(df)
+
+print("\n=== DUPLICATE ROWS ===")
+print(duplicate_rows)

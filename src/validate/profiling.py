@@ -2,6 +2,7 @@ import pandas as pd
 from config.settings import RAW_DATA_DIR
 from src.utils.logger import logger
 from src.extract.loaders import load_dataset
+from src.validate.profiling_utils import run_basic_profile
 
 # ==============================
 # Selección de archivo
@@ -40,11 +41,4 @@ logger.info("Archivo cargado correctamente")
 # Profiling básico
 # ==============================
 
-print("\n=== INFO GENERAL ===")
-df.info()
-
-print("\n=== COLUMNAS ===")
-print(df.columns.tolist())
-
-print("\n=== PRIMERAS FILAS ===")
-print(df.head())
+run_basic_profile(df)

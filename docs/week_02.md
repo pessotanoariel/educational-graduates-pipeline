@@ -20,8 +20,8 @@ The focus of this week is not adding complexity, but improving automation, reusa
 
 ## Day 1 — Reusable Profiling Functions
 
-- [ ] Create reusable profiling functions
-- [ ] Separate profiling logic from execution flow
+- [X] Create reusable profiling functions
+- [X] Separate profiling logic from execution flow
 - [ ] Create summary statistics outputs
 - [ ] Reduce duplicated profiling code
 

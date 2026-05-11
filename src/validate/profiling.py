@@ -8,7 +8,8 @@ from src.validate.profiling_utils import (
 )
 from src.validate.quality_checks import (
     check_null_values,
-    check_duplicate_rows
+    check_duplicate_rows,
+    check_document_length
 )
 
 # ==============================
@@ -66,3 +67,17 @@ duplicate_rows = check_duplicate_rows(df)
 
 print("\n=== DUPLICATE ROWS ===")
 print(duplicate_rows)
+
+invalid_documents = check_document_length(
+    df,
+    document_column="Nro de documento",
+    document_type_column="Tipo de documento"
+)
+print("\n=== INVALID DOCUMENTS ===")
+print(invalid_documents)
+
+if len(invalid_documents) > 0:
+
+    logger.warning(
+        f"{len(invalid_documents)} invalid documents detected"
+    )

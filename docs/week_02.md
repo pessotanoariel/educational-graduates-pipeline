@@ -31,8 +31,8 @@ The focus of this week is not adding complexity, but improving automation, reusa
 
 - [X] Validate null values
 - [X] Validate duplicate documents
-- [ ] Detect invalid document lengths
-- [ ] Log quality warnings
+- [X] Detect invalid document lengths
+- [X] Log quality warnings
 
 ---
 

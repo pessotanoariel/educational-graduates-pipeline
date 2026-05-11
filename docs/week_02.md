@@ -22,7 +22,7 @@ The focus of this week is not adding complexity, but improving automation, reusa
 
 - [X] Create reusable profiling functions
 - [X] Separate profiling logic from execution flow
-- [ ] Create summary statistics outputs
+- [X] Create summary statistics outputs
 - [ ] Reduce duplicated profiling code
 
 ---

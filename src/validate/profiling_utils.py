@@ -8,3 +8,17 @@ def run_basic_profile(df):
 
     print("\n=== PRIMERAS FILAS ===")
     print(df.head())
+
+def generate_dataset_summary(df):
+
+    summary = {
+        "rows": len(df),
+        "columns": len(df.columns),
+        "duplicate_rows": df.duplicated().sum(),
+        "memory_mb": round(
+            df.memory_usage(deep=True).sum() / 1024**2,
+            2
+        )
+    }
+
+    return summary

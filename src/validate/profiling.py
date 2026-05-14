@@ -1,83 +1,83 @@
-import pandas as pd
 from config.settings import RAW_DATA_DIR
 from src.utils.logger import logger
 from src.extract.loaders import load_dataset
 from src.validate.profiling_utils import (
-    run_basic_profile,
-    generate_dataset_summary
+    process_dataset,
+    get_dataset_paths
 )
 from src.validate.quality_checks import (
     check_null_values,
     check_duplicate_rows,
-    check_document_length
+    check_document_length,
+    columns_exist
 )
 
 # ==============================
-# Selección de archivo
+# Dataset Discovery
 # ==============================
 
-# archivo = "graduados_cac.xlsx"
-# archivo = "graduados_ingles.xlsx"
-# archivo = "graduados_tt.xlsx"
-# archivo = "graduados_microcredenciales_historico.xlsx"
-# archivo = "graduados_microcredenciales_2026.xlsx"
-# archivo = "graduados_cfp.csv"
-# archivo = "graduados_enof_historico.csv"
-# archivo = "graduados_enof_2026_1.csv"
-archivo = "egresados_sited_2026-04-23.csv"
-# archivo = "graduados_secundarte.xlsx"
+dataset_paths = get_dataset_paths(RAW_DATA_DIR)
 
 # ==============================
-# Ruta
+# Dataset Processing
 # ==============================
 
-path = RAW_DATA_DIR / archivo
+for dataset_path in dataset_paths:
 
-if not path.exists():
-    raise FileNotFoundError(f"No se encontró el archivo en: {path}")
+    logger.info(
+        f"Processing dataset: {dataset_path.name}"
+    )
 
-logger.info(f"Archivo seleccionado: {archivo}")
+    df = load_dataset(dataset_path)
 
-# ==============================
-# Carga del dataset
-# ==============================
-
-df = load_dataset(path)
-logger.info("Archivo cargado correctamente")
+    process_dataset(df, dataset_name=dataset_path.name)
 
 # ==============================
-# Profiling básico
+# Quality Checks
 # ==============================
 
-run_basic_profile(df)
+    null_summary = check_null_values(df)
 
-summary = generate_dataset_summary(df)
+    print("\n=== NULL VALUES ===")
+    print(null_summary)
 
-print("\n=== DATASET SUMMARY ===")
+    duplicate_rows = check_duplicate_rows(df)
 
-for key, value in summary.items():
-    print(f"{key}: {value}")
+    print("\n=== DUPLICATE ROWS ===")
+    print(duplicate_rows)
 
-null_summary = check_null_values(df)
+# ==============================
+# Document Validation
+# ==============================
 
-print("\n=== NULL VALUES ===")
-print(null_summary)
+    required_columns = [
+        "Tipo de documento",
+        "Nro de documento"
+    ]
 
-duplicate_rows = check_duplicate_rows(df)
+    if columns_exist(df, required_columns):
 
-print("\n=== DUPLICATE ROWS ===")
-print(duplicate_rows)
+        invalid_documents = check_document_length(
+            df,
+            document_column="Nro de documento",
+            document_type_column="Tipo de documento"
+        )
 
-invalid_documents = check_document_length(
-    df,
-    document_column="Nro de documento",
-    document_type_column="Tipo de documento"
-)
-print("\n=== INVALID DOCUMENTS ===")
-print(invalid_documents)
+        print("\n=== INVALID DOCUMENTS ===")
+        print(invalid_documents)
 
-if len(invalid_documents) > 0:
+        if len(invalid_documents) > 0:
 
-    logger.warning(
-        f"{len(invalid_documents)} invalid documents detected"
+            logger.warning(
+            f"{len(invalid_documents)} invalid documents detected"
+            )
+
+    else:
+
+        logger.warning(
+            "Document validation skipped: required columns not found"
+        )
+
+    logger.info(
+        f"Finished processing dataset: {dataset_path.name}"
     )

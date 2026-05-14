@@ -8,11 +8,13 @@ def check_null_values(df):
 
     return null_summary
 
+
 def check_duplicate_rows(df):
     """Return the count of duplicate rows in the dataset."""
     duplicate_count = df.duplicated().sum()
 
     return duplicate_count
+
 
 def check_document_length(
     df,
@@ -21,7 +23,7 @@ def check_document_length(
     valid_document_type="DNI",
     min_length=7
 ):
-
+    """Check for documents with invalid length based on type."""
     filtered_df = df[
         df[document_type_column] == valid_document_type
     ]
@@ -32,3 +34,9 @@ def check_document_length(
     ]
 
     return invalid_documents
+
+
+def columns_exist(df, required_columns):
+    """Check if required columns exist in dataframe."""
+
+    return set(required_columns).issubset(df.columns)

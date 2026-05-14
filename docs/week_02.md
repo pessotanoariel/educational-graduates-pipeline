@@ -38,10 +38,10 @@ The focus of this week is not adding complexity, but improving automation, reusa
 
 ## Day 3 — Multi-Source Processing
 
-- [ ] Iterate automatically through datasets in `data/raw`
-- [ ] Skip unsupported files safely
-- [ ] Process datasets sequentially
-- [ ] Improve execution logging
+- [X] Iterate automatically through datasets in `data/raw`
+- [X] Skip unsupported files safely
+- [X] Process datasets sequentially
+- [X] Improve execution logging
 
 ---
 

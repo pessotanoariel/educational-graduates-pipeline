@@ -1,3 +1,4 @@
+import pandas as pd
 from config.settings import (
     RAW_DATA_DIR,
     OUTPUT_DATA_DIR
@@ -22,6 +23,8 @@ from src.load.exporters import export_dataframe
 
 dataset_paths = get_dataset_paths(RAW_DATA_DIR)
 
+profiling_summaries = []
+
 # ==============================
 # Dataset Processing
 # ==============================
@@ -34,7 +37,12 @@ for dataset_path in dataset_paths:
 
     df = load_dataset(dataset_path)
 
-    process_dataset(df, dataset_name=dataset_path.name)
+    summary = process_dataset(
+    df,
+    dataset_name=dataset_path.name
+    )
+
+    profiling_summaries.append(summary)
 
 # ==============================
 # Quality Checks
@@ -95,3 +103,21 @@ for dataset_path in dataset_paths:
     logger.info(
         f"Finished processing dataset: {dataset_path.name}"
     )
+
+# ==============================
+# Profiling Summary Export
+# ==============================
+
+profiling_summary_df = pd.DataFrame(
+    profiling_summaries
+)
+
+summary_output_path = (
+    OUTPUT_DATA_DIR /
+    "profiling_summary.csv"
+)
+
+export_dataframe(
+    profiling_summary_df,
+    summary_output_path
+)

@@ -54,3 +54,5 @@ def process_dataset(df, dataset_name=None):
 
     for key, value in summary.items():
         print(f"{key}: {value}")
+
+    return summary

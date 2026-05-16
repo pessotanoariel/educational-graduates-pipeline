@@ -17,11 +17,15 @@ def run_basic_profile(df, dataset_name=None):
 def generate_dataset_summary(df, dataset_name=None):
     """Generate basic dataset metadata summary."""
 
+    total_null_values = df.isnull().sum().sum()
+
     summary = {
         "dataset_name": dataset_name,
         "rows": len(df),
         "columns": len(df.columns),
         "duplicate_rows": df.duplicated().sum(),
+        "has_duplicates": df.duplicated().sum() > 0,
+        "total_null_values": total_null_values,
         "memory_mb": round(
             df.memory_usage(deep=True).sum() / 1024**2,
             2

@@ -47,7 +47,7 @@ The focus of this week is not adding complexity, but improving automation, reusa
 
 ## Day 4 — Validation Outputs
 
-- [ ] Export invalid records
+- [X] Export invalid records
 - [ ] Generate profiling summaries
 - [ ] Save outputs into `data/output`
 - [ ] Create basic quality reports

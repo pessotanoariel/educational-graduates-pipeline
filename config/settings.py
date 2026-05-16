@@ -15,3 +15,6 @@ LOGS_DIR = BASE_DIR / "logs"
 
 # Docs
 DOCS_DIR = BASE_DIR / "docs"
+
+# Output directory for processed datasets
+OUTPUT_DATA_DIR = BASE_DIR / "data" / "output"

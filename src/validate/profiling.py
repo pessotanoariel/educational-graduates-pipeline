@@ -1,4 +1,7 @@
-from config.settings import RAW_DATA_DIR
+from config.settings import (
+    RAW_DATA_DIR,
+    OUTPUT_DATA_DIR
+)
 from src.utils.logger import logger
 from src.extract.loaders import load_dataset
 from src.validate.profiling_utils import (
@@ -11,6 +14,7 @@ from src.validate.quality_checks import (
     check_document_length,
     columns_exist
 )
+from src.load.exporters import export_dataframe
 
 # ==============================
 # Dataset Discovery
@@ -67,6 +71,16 @@ for dataset_path in dataset_paths:
         print(invalid_documents)
 
         if len(invalid_documents) > 0:
+
+            output_path = (
+                OUTPUT_DATA_DIR /
+                f"{dataset_path.stem}_invalid_documents.csv"
+            )
+
+            export_dataframe(
+                invalid_documents,
+                output_path
+            )
 
             logger.warning(
             f"{len(invalid_documents)} invalid documents detected"

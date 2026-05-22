@@ -1,7 +1,8 @@
 import pandas as pd
 from config.settings import (
     RAW_DATA_DIR,
-    OUTPUT_DATA_DIR
+    VALIDATION_OUTPUT_DIR,
+    PROFILING_OUTPUT_DIR
 )
 from src.utils.logger import logger
 from src.extract.loaders import load_dataset
@@ -13,9 +14,17 @@ from src.validate.quality_checks import (
     check_null_values,
     check_duplicate_rows,
     check_document_length,
-    columns_exist
+    columns_exist,
+    validate_standardized_schema
 )
 from src.load.exporters import export_dataframe
+
+from src.transform.standardize import (
+    standardize_column_names,
+    normalize_document_number,
+    normalize_document_type,
+    normalize_gender
+)
 
 # ==============================
 # Dataset Discovery
@@ -35,11 +44,41 @@ for dataset_path in dataset_paths:
         f"Processing dataset: {dataset_path.name}"
     )
 
+# ==============================
+# Dataset Loading
+# ==============================
+
     df = load_dataset(dataset_path)
 
+# ==============================
+# Schema Standardization
+# ==============================
+
+    standardized_df = standardize_column_names(df)
+
+# ==============================
+# Value Normalization
+# ==============================    
+
+    standardized_df = normalize_document_number(
+        standardized_df
+    )
+
+    standardized_df = normalize_document_type(
+        standardized_df
+    )
+
+    standardized_df = normalize_gender(
+        standardized_df
+    )
+
+# ==============================
+# Dataset Profiling
+# ==============================
+
     summary = process_dataset(
-    df,
-    dataset_name=dataset_path.name
+        standardized_df,
+        dataset_name=dataset_path.name
     )
 
     profiling_summaries.append(summary)
@@ -48,31 +87,54 @@ for dataset_path in dataset_paths:
 # Quality Checks
 # ==============================
 
-    null_summary = check_null_values(df)
+    null_summary = check_null_values(standardized_df)
 
     print("\n=== NULL VALUES ===")
     print(null_summary)
 
-    duplicate_rows = check_duplicate_rows(df)
+    duplicate_rows = check_duplicate_rows(standardized_df)
 
     print("\n=== DUPLICATE ROWS ===")
     print(duplicate_rows)
+
+# ==============================
+# Schema Validation
+# ==============================
+
+    expected_columns = [
+        "document_number",
+        "document_type"
+    ]
+
+    missing_columns = validate_standardized_schema(
+        standardized_df,
+        expected_columns
+    )
+
+    if len(missing_columns) > 0:
+
+        logger.warning(
+            f"Missing standardized columns: {missing_columns}"
+        )
 
 # ==============================
 # Document Validation
 # ==============================
 
     required_columns = [
-        "Tipo de documento",
-        "Nro de documento"
+        "document_type",
+        "document_number"
     ]
 
-    if columns_exist(df, required_columns):
+    if columns_exist(
+        standardized_df,
+        required_columns
+        ):
 
         invalid_documents = check_document_length(
-            df,
-            document_column="Nro de documento",
-            document_type_column="Tipo de documento"
+            standardized_df,
+            document_column="document_number",
+            document_type_column="document_type"
         )
 
         print("\n=== INVALID DOCUMENTS ===")
@@ -81,7 +143,7 @@ for dataset_path in dataset_paths:
         if len(invalid_documents) > 0:
 
             output_path = (
-                OUTPUT_DATA_DIR /
+                VALIDATION_OUTPUT_DIR /
                 f"{dataset_path.stem}_invalid_documents.csv"
             )
 
@@ -91,7 +153,7 @@ for dataset_path in dataset_paths:
             )
 
             logger.warning(
-            f"{len(invalid_documents)} invalid documents detected"
+                f"{len(invalid_documents)} invalid documents detected"
             )
 
     else:
@@ -99,7 +161,7 @@ for dataset_path in dataset_paths:
         logger.warning(
             "Document validation skipped: required columns not found"
         )
-
+    
     logger.info(
         f"Finished processing dataset: {dataset_path.name}"
     )
@@ -113,7 +175,7 @@ profiling_summary_df = pd.DataFrame(
 )
 
 summary_output_path = (
-    OUTPUT_DATA_DIR /
+    PROFILING_OUTPUT_DIR /
     "profiling_summary.csv"
 )
 

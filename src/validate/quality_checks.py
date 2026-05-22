@@ -40,3 +40,17 @@ def columns_exist(df, required_columns):
     """Check if required columns exist in dataframe."""
 
     return set(required_columns).issubset(df.columns)
+
+def validate_standardized_schema(
+    df,
+    expected_columns
+):
+    """Validate standardized dataframe schema."""
+
+    missing_columns = [
+        column
+        for column in expected_columns
+        if column not in df.columns
+    ]
+
+    return missing_columns

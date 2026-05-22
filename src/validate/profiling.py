@@ -23,7 +23,8 @@ from src.transform.standardize import (
     standardize_column_names,
     normalize_document_number,
     normalize_document_type,
-    normalize_gender
+    normalize_gender,
+    normalize_text_fields
 )
 
 # ==============================
@@ -70,6 +71,10 @@ for dataset_path in dataset_paths:
 
     standardized_df = normalize_gender(
         standardized_df
+    )
+
+    standardized_df = normalize_text_fields(
+    standardized_df
     )
 
 # ==============================

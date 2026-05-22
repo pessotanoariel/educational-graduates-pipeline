@@ -11,10 +11,10 @@
 
 ## Day 2 — Data Cleaning
 
-- [ ] Clean document values
-- [ ] Normalize text fields
-- [ ] Handle empty and invalid values
-- [ ] Standardize categorical values
+- [X] Clean document values
+- [X] Normalize text fields
+- [X] Handle empty and invalid values
+- [X] Standardize categorical values
 
 ---
 

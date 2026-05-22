@@ -1,4 +1,4 @@
-"""Column mapping definitions for schema standardization."""
+"""Mapping definitions for schema standardization."""
 
 COLUMN_MAPPINGS = {
 
@@ -78,4 +78,24 @@ COLUMN_MAPPINGS = {
 
     "año": "academic_year",
     "anio": "academic_year",
+}
+
+# ==============================
+# Gender Value Mapping
+# ==============================
+
+GENDER_MAPPING = {
+
+    "m": "masculino",
+    "masculino": "masculino",
+
+    "f": "femenino",
+    "femenino": "femenino",
+
+    "x": "no_binario",
+    "otro": "no_binario",
+    "no_binario": "no_binario",
+
+    "sin_datos": "sin_datos",
+    "sin datos": "sin_datos"
 }

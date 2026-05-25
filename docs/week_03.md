@@ -29,10 +29,10 @@
 
 ## Day 4 — Dataset Consolidation
 
-- [ ] Concatenate standardized datasets
-- [ ] Create unified graduates dataset
-- [ ] Remove duplicated records
-- [ ] Export consolidated dataset
+- [X] Concatenate standardized datasets
+- [X] Create unified graduates dataset
+- [X] Remove duplicated records
+- [X] Export consolidated dataset
 
 ---
 

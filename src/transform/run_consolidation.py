@@ -1,6 +1,9 @@
+import pandas as pd
+
 from config.settings import (
     PROCESSED_DATA_DIR,
-    CONSOLIDATED_OUTPUT_DIR
+    CONSOLIDATED_OUTPUT_DIR,
+    REPORTS_OUTPUT_DIR
 )
 
 from src.transform.consolidate import (
@@ -13,6 +16,8 @@ from src.load.exporters import (
     export_dataframe
 )
 
+from src.utils.logger import logger
+
 # ==============================
 # Load Processed Datasets
 # ==============================
@@ -22,12 +27,16 @@ datasets = load_processed_datasets(
 )
 
 # ==============================
-# Concatenate Datasets
+# Dataset Consolidation
 # ==============================
 
 unified_df = concatenate_datasets(
     datasets
 )
+
+# ==============================
+# Record Deduplication
+# ==============================
 
 deduplicated_df = remove_duplicate_records(
     unified_df
@@ -60,6 +69,10 @@ export_dataframe(
 print("\n=== CONSOLIDATED DATASET EXPORTED ===")
 print(consolidated_output_path)
 
+# ==============================
+# Consolidation Metrics
+# ==============================
+
 print("\n=== DEDUPLICATION SUMMARY ===")
 
 print(
@@ -68,4 +81,42 @@ print(
 
 print(
     f"Rows after deduplication: {len(deduplicated_df)}"
+)
+
+duplicates_removed = (
+    len(unified_df) -
+    len(deduplicated_df)
+)
+
+print(
+    f"Duplicated records removed: {duplicates_removed}"
+)
+
+# ==============================
+# Consolidation Summary Report
+# ==============================
+
+consolidation_summary_df = pd.DataFrame([
+    {
+        "total_records": len(unified_df),
+        "unique_people": len(deduplicated_df),
+        "duplicates_removed": duplicates_removed
+    }
+])
+
+summary_output_path = (
+    REPORTS_OUTPUT_DIR /
+    "consolidation_summary.csv"
+)
+
+export_dataframe(
+    consolidation_summary_df,
+    summary_output_path
+)
+
+print("\n=== CONSOLIDATION SUMMARY EXPORTED ===")
+print(summary_output_path)
+
+logger.info(
+    "Dataset consolidation pipeline completed"
 )

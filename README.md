@@ -32,6 +32,10 @@ project/
 │   ├── raw/        # Raw input datasets
 │   ├── processed/  # Intermediate processed datasets
 │   └── output/     # Pipeline outputs and reports
+│       ├── consolidated/
+│       ├── profiling/
+│       ├── reports/
+│       └── validation/
 │
 ├── docs/           # Technical documentation and roadmap
 ├── logs/           # Execution logs
@@ -39,7 +43,7 @@ project/
 ├── src/
 │   ├── extract/    # Dataset loaders
 │   ├── load/       # Export utilities
-│   ├── transform/  # Future transformation logic
+│   ├── transform/  # Dataset transformation and consolidation
 │   ├── utils/      # Shared utilities
 │   └── validate/   # Profiling and quality checks
 │
@@ -78,14 +82,24 @@ Run profiling pipeline:
 python -m src.validate.profiling
 ```
 
+Run consolidation pipeline:
+
+```bash
+python -m src.transform.run_consolidation
+```
+
 ---
 
 ## Outputs
 
 The pipeline automatically generates:
 
+- Processed standardized datasets
 - Profiling summary reports
-- Invalid record exports
+- Validation reports
+- Consolidated datasets
+- Deduplication summaries
+- Consolidation reports
 - Execution logs
 
 Outputs are stored in:
@@ -100,10 +114,15 @@ data/output/
 
 Current version includes:
 
-- Multi-source profiling
-- Initial quality reporting
-- Validation exports
-- Modular project architecture
+- Multi-source dataset ingestion
+- Dataset standardization and normalization
+- Modular transformation architecture
+- Data quality validations
+- Processed dataset generation
+- Dataset consolidation
+- Record deduplication
+- Consolidation summary reporting
+- Centralized configuration and logging
 
 ---
 
@@ -111,13 +130,13 @@ Current version includes:
 
 Planned future improvements:
 
-- Schema normalization
-- Unified graduate datasets
-- Advanced quality validations
-- Automated transformations
-- Historical profiling tracking
-- Consolidated master datasets
+- Advanced consolidation rules
+- Source priority management
+- Historical quality tracking
+- Automated testing
+- Pipeline orchestration
+- Performance optimization
 - API integration
 - Data warehouse integration
-
+  
 ---

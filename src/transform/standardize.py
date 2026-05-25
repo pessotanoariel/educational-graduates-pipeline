@@ -208,3 +208,26 @@ def normalize_text_fields(df):
             )
 
     return df
+
+def transform_dataset(df):
+    """Apply standardization and normalization transformations."""
+
+    transformed_df = standardize_column_names(df)
+
+    transformed_df = normalize_document_number(
+        transformed_df
+    )
+
+    transformed_df = normalize_document_type(
+        transformed_df
+    )
+
+    transformed_df = normalize_gender(
+        transformed_df
+    )
+
+    transformed_df = normalize_text_fields(
+        transformed_df
+    )
+
+    return transformed_df

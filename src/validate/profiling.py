@@ -1,6 +1,7 @@
 import pandas as pd
 from config.settings import (
     RAW_DATA_DIR,
+    PROCESSED_DATA_DIR,
     VALIDATION_OUTPUT_DIR,
     PROFILING_OUTPUT_DIR
 )
@@ -20,11 +21,7 @@ from src.validate.quality_checks import (
 from src.load.exporters import export_dataframe
 
 from src.transform.standardize import (
-    standardize_column_names,
-    normalize_document_number,
-    normalize_document_type,
-    normalize_gender,
-    normalize_text_fields
+    transform_dataset
 )
 
 # ==============================
@@ -52,29 +49,27 @@ for dataset_path in dataset_paths:
     df = load_dataset(dataset_path)
 
 # ==============================
-# Schema Standardization
+# Dataset Transformation
 # ==============================
 
-    standardized_df = standardize_column_names(df)
+    standardized_df = transform_dataset(df)
 
-# ==============================
-# Value Normalization
-# ==============================    
-
-    standardized_df = normalize_document_number(
-        standardized_df
+    processed_output_path = (
+        PROCESSED_DATA_DIR /
+        f"{dataset_path.stem}_processed.csv"
     )
 
-    standardized_df = normalize_document_type(
-        standardized_df
+    export_dataframe(
+        standardized_df,
+        processed_output_path
     )
 
-    standardized_df = normalize_gender(
-        standardized_df
+    logger.info(
+        f"Processed dataset exported: {processed_output_path.name}"
     )
 
-    standardized_df = normalize_text_fields(
-    standardized_df
+    logger.info(
+        f"Rows exported: {len(standardized_df)}"
     )
 
 # ==============================

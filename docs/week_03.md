@@ -20,10 +20,10 @@
 
 ## Day 3 — Dataset Transformation
 
-- [ ] Create transformation modules
-- [ ] Apply reusable transformations
-- [ ] Generate processed datasets
-- [ ] Save standardized outputs
+- [X] Create transformation modules
+- [X] Apply reusable transformations
+- [X] Generate processed datasets
+- [X] Save standardized outputs
 
 ---
 

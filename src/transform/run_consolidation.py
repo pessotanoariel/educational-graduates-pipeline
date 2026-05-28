@@ -14,7 +14,10 @@ from src.transform.consolidate import (
     validate_critical_fields,
     detect_missing_document_identities,
     analyze_null_distribution,
-    review_duplicated_records
+    review_duplicated_records,
+    apply_source_priority,
+    detect_unmapped_sources,
+    enrich_email_fields
 )
 
 from src.load.exporters import (
@@ -43,8 +46,38 @@ unified_df = concatenate_datasets(
 # Record Deduplication
 # ==============================
 
-deduplicated_df = remove_duplicate_records(
+prioritized_df = apply_source_priority(
     unified_df
+)
+
+unmapped_sources_df = detect_unmapped_sources(
+    prioritized_df
+)
+
+deduplicated_df = remove_duplicate_records(
+    prioritized_df
+)
+
+emails_before_enrichment = (
+    deduplicated_df["email"]
+    .notna()
+    .sum()
+)
+
+deduplicated_df = enrich_email_fields(
+    prioritized_df,
+    deduplicated_df
+)
+
+emails_after_enrichment = (
+    deduplicated_df["email"]
+    .notna()
+    .sum()
+)
+
+emails_enriched = (
+    emails_after_enrichment -
+    emails_before_enrichment
 )
 
 # ==============================
@@ -103,6 +136,19 @@ print(
     duplicated_records_df.head(10)
 )
 
+print("\n=== UNMAPPED SOURCES ===")
+
+print(
+    unmapped_sources_df[
+        [
+            "source_file",
+            "source_priority"
+        ]
+    ]
+    .drop_duplicates()
+    .head(10)
+)
+
 # ==============================
 # Quality Validation Exports
 # ==============================
@@ -137,6 +183,15 @@ export_dataframe(
     null_distribution_output_path
 )
 
+unmapped_sources_output_path = (
+    VALIDATION_OUTPUT_DIR /
+    "unmapped_sources.csv"
+)
+
+export_dataframe(
+    unmapped_sources_df,
+    unmapped_sources_output_path
+)
 
 # ==============================
 # Consolidated Dataset Preview
@@ -168,6 +223,23 @@ print(consolidated_output_path)
 # ==============================
 # Consolidation Metrics
 # ==============================
+
+print("\n=== EMAIL ENRICHMENT SUMMARY ===")
+
+print(
+    f"Emails before enrichment: "
+    f"{emails_before_enrichment}"
+)
+
+print(
+    f"Emails after enrichment: "
+    f"{emails_after_enrichment}"
+)
+
+print(
+    f"Emails enriched: "
+    f"{emails_enriched}"
+)
 
 print("\n=== DEDUPLICATION SUMMARY ===")
 

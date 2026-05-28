@@ -1,5 +1,9 @@
 import pandas as pd
 
+from src.transform.source_priority import (
+    SOURCE_PRIORITY
+)
+
 def load_processed_datasets(processed_data_dir):
     """Load processed CSV datasets from processed data directory."""
 
@@ -36,13 +40,18 @@ def concatenate_datasets(datasets):
     return unified_df
 
 def remove_duplicate_records(df):
-    """Remove duplicated records based on document identity."""
+    """Remove duplicated records using source priority."""
 
-    deduplicated_df = df.drop_duplicates(
+    sorted_df = df.sort_values(
+        by="source_priority"
+    )
+
+    deduplicated_df = sorted_df.drop_duplicates(
         subset=[
             "document_type",
             "document_number"
-        ]
+        ],
+        keep="first"
     )
 
     return deduplicated_df
@@ -122,3 +131,129 @@ def review_duplicated_records(df):
     )
 
     return duplicated_df
+
+def apply_source_priority(df):
+    """Apply source priority rules."""
+
+    df["source_priority"] = 999
+
+    for source_name, priority in SOURCE_PRIORITY.items():
+
+        mask = df["source_file"].str.contains(
+            source_name,
+            case=False,
+            na=False
+        )
+
+        df.loc[
+            mask,
+            "source_priority"
+        ] = priority
+
+    return df
+
+def detect_unmapped_sources(df):
+    """Detect records without mapped source priority."""
+
+    unmapped_df = df[
+        df["source_priority"] == 999
+    ]
+
+    return unmapped_df
+
+def consolidate_person_records(df):
+    """Consolidate person records using field enrichment."""
+
+    grouped_records = []
+
+    grouped_df = df.groupby(
+        [
+            "document_type",
+            "document_number"
+        ],
+        dropna=False
+    )
+
+    for _, group in grouped_df:
+
+        sorted_group = group.sort_values(
+            by="source_priority"
+        )
+
+        best_record = (
+            sorted_group.iloc[0]
+            .copy()
+        )
+
+        if pd.isna(best_record["email"]):
+
+            available_emails = (
+                sorted_group["email"]
+                .dropna()
+            )
+
+            if len(available_emails) > 0:
+
+                best_record["email"] = (
+                    available_emails.iloc[0]
+                )
+
+        grouped_records.append(best_record)
+
+    consolidated_df = pd.DataFrame(
+        grouped_records
+    )
+
+    return consolidated_df
+
+def enrich_email_fields(df, deduplicated_df):
+    """Enrich missing email values."""
+
+    email_df = (
+        df[
+            [
+                "document_type",
+                "document_number",
+                "email",
+                "source_priority"
+            ]
+        ]
+        .dropna(subset=["email"])
+        .sort_values(by="source_priority")
+        .drop_duplicates(
+            subset=[
+                "document_type",
+                "document_number"
+            ],
+            keep="first"
+        )
+    )
+
+    deduplicated_df = deduplicated_df.merge(
+        email_df[
+            [
+                "document_type",
+                "document_number",
+                "email"
+            ]
+        ],
+        on=[
+            "document_type",
+            "document_number"
+        ],
+        how="left",
+        suffixes=("", "_enriched")
+    )
+
+    deduplicated_df["email"] = (
+        deduplicated_df["email"]
+        .fillna(
+            deduplicated_df["email_enriched"]
+        )
+    )
+
+    deduplicated_df = deduplicated_df.drop(
+        columns=["email_enriched"]
+    )
+
+    return deduplicated_df

@@ -12,11 +12,11 @@
 
 ## Day 2 — Source Priority Rules
 
-- [ ] Define source priority hierarchy
-- [ ] Create source survivorship rules
-- [ ] Handle conflicting values
-- [ ] Improve person consolidation
-- [ ] Preserve best available records
+- [X] Define source priority hierarchy
+- [X] Create source survivorship rules
+- [X] Handle conflicting values
+- [X] Improve person consolidation
+- [X] Preserve best available records
 
 ---
 

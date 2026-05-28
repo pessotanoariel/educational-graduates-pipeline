@@ -3,13 +3,18 @@ import pandas as pd
 from config.settings import (
     PROCESSED_DATA_DIR,
     CONSOLIDATED_OUTPUT_DIR,
-    REPORTS_OUTPUT_DIR
+    REPORTS_OUTPUT_DIR,
+    VALIDATION_OUTPUT_DIR
 )
 
 from src.transform.consolidate import (
     load_processed_datasets,
     concatenate_datasets,
-    remove_duplicate_records
+    remove_duplicate_records,
+    validate_critical_fields,
+    detect_missing_document_identities,
+    analyze_null_distribution,
+    review_duplicated_records
 )
 
 from src.load.exporters import (
@@ -43,7 +48,98 @@ deduplicated_df = remove_duplicate_records(
 )
 
 # ==============================
-# Preview
+# Quality Validation
+# ==============================
+
+critical_field_summary = validate_critical_fields(
+    deduplicated_df
+)
+
+missing_identity_df = detect_missing_document_identities(
+    deduplicated_df
+)
+
+null_distribution_df = analyze_null_distribution(
+    deduplicated_df
+)
+
+duplicated_records_df = review_duplicated_records(
+    unified_df
+)
+
+# ==============================
+# Quality Validation Preview
+# ==============================
+
+print("\n=== CRITICAL FIELD VALIDATION ===")
+
+for field, missing_count in critical_field_summary.items():
+
+    print(
+        f"{field}: {missing_count} missing values"
+    )
+
+print("\n=== MISSING DOCUMENT IDENTITIES ===")
+
+print(
+    missing_identity_df[
+        [
+            "document_type",
+            "document_number",
+            "source_file"
+        ]
+    ].head()
+)
+
+print("\n=== NULL DISTRIBUTION ===")
+
+print(
+    null_distribution_df.head(10)
+)
+
+print("\n=== DUPLICATED RECORDS ===")
+
+print(
+    duplicated_records_df.head(10)
+)
+
+# ==============================
+# Quality Validation Exports
+# ==============================
+
+duplicated_records_output_path = (
+    REPORTS_OUTPUT_DIR /
+    "duplicated_records_report.csv"
+)
+
+export_dataframe(
+    duplicated_records_df,
+    duplicated_records_output_path
+)
+
+missing_identity_output_path = (
+    VALIDATION_OUTPUT_DIR /
+    "missing_document_identities.csv"
+)
+
+export_dataframe(
+    missing_identity_df,
+    missing_identity_output_path
+)
+
+null_distribution_output_path = (
+    REPORTS_OUTPUT_DIR /
+    "null_distribution_report.csv"
+)
+
+export_dataframe(
+    null_distribution_df,
+    null_distribution_output_path
+)
+
+
+# ==============================
+# Consolidated Dataset Preview
 # ==============================
 
 print("\n=== UNIFIED DATASET ===")

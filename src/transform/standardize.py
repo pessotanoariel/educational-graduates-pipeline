@@ -152,7 +152,16 @@ def normalize_document_number(df):
             .str.replace(".", "", regex=False)
             .str.replace(",", "", regex=False)
             .str.replace(" ", "", regex=False)
-            .replace("nan", pd.NA)
+            .replace(
+                [
+                    "nan",
+                    "None",
+                    "NONE",
+                    "",
+                    " "
+                ],
+                pd.NA
+            )
         )
 
     return df

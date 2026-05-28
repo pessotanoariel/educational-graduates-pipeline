@@ -22,11 +22,11 @@
 
 ## Day 3 — Testing
 
-- [ ] Add transformation tests
-- [ ] Add validation tests
-- [ ] Add consolidation tests
-- [ ] Test edge cases
-- [ ] Validate mappings
+- [X] Add transformation tests
+- [X] Add validation tests
+- [X] Add consolidation tests
+- [X] Test edge cases
+- [X] Validate mappings
 
 ---
 

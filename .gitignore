@@ -1,5 +1,6 @@
 # Virtual environment
 venv/
+.env
 
 # Python cache
 __pycache__/
@@ -9,7 +10,7 @@ __pycache__/
 logs/
 *.log
 
-# Jupyter
+# Notebooks checkpoints
 .ipynb_checkpoints/
 
 # VS Code
@@ -20,10 +21,19 @@ logs/
 Thumbs.db
 
 # Data outputs
-data/raw
-data/output/
-data/processed/
+data/raw/*
+data/processed/*
+data/output/*
 
 # Temporary files
 temp/
 tmp/
+
+# Keep folder structure
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/output/.gitkeep
+!data/output/consolidated/.gitkeep
+!data/output/profiling/.gitkeep
+!data/output/reports/.gitkeep
+!data/output/validation/.gitkeep

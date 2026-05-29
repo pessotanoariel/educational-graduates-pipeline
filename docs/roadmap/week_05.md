@@ -28,11 +28,11 @@ Improve the quality, usability, and maintainability of the consolidated graduate
 
 ## Day 3 — Repository & Documentation Improvements
 
-- [ ] Review GitHub repository
-- [ ] Improve README examples
-- [ ] Create architecture documentation
-- [ ] Add project diagrams
-- [ ] Review documentation structure
+- [X] Review GitHub repository
+- [X] Improve README examples
+- [X] Create architecture documentation
+- [X] Add project diagrams
+- [X] Review documentation structure
 
 ---
 

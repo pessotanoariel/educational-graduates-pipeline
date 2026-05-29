@@ -8,6 +8,14 @@ The project aims to progressively evolve into a reproducible and scalable data e
 
 ---
 
+## Documentation
+
+Additional project documentation is available under:
+
+- docs/architecture.md
+- docs/consolidation_logic.md
+- docs/roadmap.md
+
 ## Current Features
 
 - Multi-source dataset processing
@@ -19,6 +27,12 @@ The project aims to progressively evolve into a reproducible and scalable data e
 - Profiling summary reports
 - Execution logging
 - Centralized project configuration
+- Dataset consolidation
+- Source prioritization
+- Record deduplication
+- Field enrichment
+- Data quality monitoring
+- Quality reporting
 
 ---
 
@@ -26,19 +40,25 @@ The project aims to progressively evolve into a reproducible and scalable data e
 
 ```text
 Raw Datasets
-    ↓
-Standardization
-    ↓
-Validation
-    ↓
+      ↓
 Profiling
-    ↓
+      ↓
+Standardization
+      ↓
+Quality Validation
+      ↓
+Processed Datasets
+      ↓
 Consolidation
-    ↓
+      ↓
 Source Prioritization
-    ↓
+      ↓
+Deduplication
+      ↓
 Field Enrichment
-    ↓
+      ↓
+Data Quality Monitoring
+      ↓
 Reports & Exports
 ```
 
@@ -64,10 +84,11 @@ Reports & Exports
 ## Consolidation
 
 - Dataset concatenation
-- Duplicate removal
 - Source priority assignment
+- Record deduplication
 - Email enrichment
-- Consolidated dataset generation
+- Phone enrichment
+- Nationality enrichment
   
 ## Project Structure
 
@@ -154,6 +175,13 @@ Outputs are stored in:
 ```text
 data/output/
 ```
+
+### Monitoring Reports
+
+- Quality summary reports
+- Null distribution reports
+- Duplicate record reports
+- Enrichment summary reports
 
 ---
 

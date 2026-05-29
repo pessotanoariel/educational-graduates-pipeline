@@ -18,11 +18,11 @@ Improve the quality, usability, and maintainability of the consolidated graduate
 
 ## Day 2 — Data Quality Monitoring
 
-- [ ] Define pipeline KPIs
-- [ ] Generate quality metrics
-- [ ] Track null percentages
-- [ ] Track duplicate percentages
-- [ ] Create quality summary reports
+- [X] Define pipeline KPIs
+- [X] Generate quality metrics
+- [X] Track null percentages
+- [X] Track duplicate percentages
+- [X] Create quality summary reports
 
 ---
 

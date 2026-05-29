@@ -130,6 +130,75 @@ def run_consolidation_pipeline():
     )
 
     # ==============================
+    # Data Quality Monitoring
+    # ==============================
+
+    total_records = len(deduplicated_df)
+
+    email_coverage_pct = round(
+        deduplicated_df["email"]
+        .notna()
+        .mean()
+        * 100,
+        2
+    )
+
+    phone_coverage_pct = round(
+        deduplicated_df["phone_number"]
+        .notna()
+        .mean()
+        * 100,
+        2
+    )
+
+    nationality_coverage_pct = round(
+        deduplicated_df["nationality"]
+        .notna()
+        .mean()
+        * 100,
+        2
+    )
+
+    missing_document_number_pct = round(
+        deduplicated_df["document_number"]
+        .isna()
+        .mean()
+        * 100,
+        2
+    )
+
+    missing_document_type_pct = round(
+        deduplicated_df["document_type"]
+        .isna()
+        .mean()
+        * 100,
+        2
+    )
+
+    missing_identity_pct = round(
+        (
+            deduplicated_df["document_number"].isna()
+            &
+            deduplicated_df["document_type"].isna()
+        )
+        .mean()
+        * 100,
+        2
+    )
+
+    duplicates_removed = (
+        len(unified_df)
+        - len(deduplicated_df)
+    )
+
+    duplicate_records_pct = round(
+        duplicates_removed
+        / len(unified_df)
+        * 100,
+        2
+    )
+
+    # ==============================
     # Quality Validation
     # ==============================
 
@@ -328,17 +397,16 @@ def run_consolidation_pipeline():
         f"Rows after deduplication: {len(deduplicated_df)}"
     )
 
-    duplicates_removed = (
-        len(unified_df) -
-        len(deduplicated_df)
-    )
-
     print(
         f"Duplicated records removed: {duplicates_removed}"
     )
 
     # ==============================
-    # PipelineSummary Report
+    # Pipeline Summary Reports
+    # ==============================
+
+    # ==============================
+    # Consolidation Reports
     # ==============================
 
     consolidation_summary_df = pd.DataFrame([
@@ -348,6 +416,16 @@ def run_consolidation_pipeline():
             "duplicates_removed": duplicates_removed
         }
     ])
+
+    summary_output_path = (
+        REPORTS_OUTPUT_DIR /
+        "consolidation_summary.csv"
+    )
+
+    export_dataframe(
+        consolidation_summary_df,
+        summary_output_path
+    )
 
     enrichment_summary_df = pd.DataFrame([
         {
@@ -370,24 +448,41 @@ def run_consolidation_pipeline():
         }
     ])
 
-    summary_output_path = (
-        REPORTS_OUTPUT_DIR /
-        "consolidation_summary.csv"
-    )
-
     enrichment_summary_output_path = (
         REPORTS_OUTPUT_DIR /
         "enrichment_summary.csv"
     )
 
     export_dataframe(
-        consolidation_summary_df,
-        summary_output_path
+        enrichment_summary_df,
+        enrichment_summary_output_path
+    )
+
+    # ==============================
+    # Data Quality Reports
+    # ==============================
+
+    quality_summary_df = pd.DataFrame([
+        {"metric": "total_records", "value": len(unified_df)},
+        {"metric": "unique_people", "value": len(deduplicated_df)},
+        {"metric": "duplicates_removed", "value": duplicates_removed},
+        {"metric": "email_coverage_pct", "value": email_coverage_pct},
+        {"metric": "phone_coverage_pct", "value": phone_coverage_pct},
+        {"metric": "nationality_coverage_pct", "value": nationality_coverage_pct},
+        {"metric": "missing_document_number_pct", "value": missing_document_number_pct},
+        {"metric": "missing_document_type_pct", "value": missing_document_type_pct},
+        {"metric": "missing_identity_pct", "value": missing_identity_pct},
+        {"metric": "duplicate_records_pct", "value": duplicate_records_pct}
+    ])
+
+    quality_summary_output_path = (
+        REPORTS_OUTPUT_DIR /
+        "quality_summary.csv"
     )
 
     export_dataframe(
-        enrichment_summary_df,
-        enrichment_summary_output_path
+        quality_summary_df,
+        quality_summary_output_path
     )
 
     print("\n=== CONSOLIDATION SUMMARY EXPORTED ===")

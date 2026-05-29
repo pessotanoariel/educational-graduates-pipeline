@@ -257,3 +257,110 @@ def enrich_email_fields(df, deduplicated_df):
     )
 
     return deduplicated_df
+
+def enrich_phone_fields(df, deduplicated_df):
+    """Enrich missing phone number values."""
+
+    phone_df = (
+        df[
+            [
+                "document_type",
+                "document_number",
+                "phone_number",
+                "source_priority"
+            ]
+        ]
+        .dropna(subset=["phone_number"])
+        .sort_values(by="source_priority")
+        .drop_duplicates(
+            subset=[
+                "document_type",
+                "document_number"
+            ],
+            keep="first"
+        )
+    )
+
+    deduplicated_df = deduplicated_df.merge(
+        phone_df[
+            [
+                "document_type",
+                "document_number",
+                "phone_number"
+            ]
+        ],
+        on=[
+            "document_type",
+            "document_number"
+        ],
+        how="left",
+        suffixes=("", "_enriched")
+    )
+
+    deduplicated_df["phone_number"] = (
+        deduplicated_df["phone_number"]
+        .fillna(
+            deduplicated_df["phone_number_enriched"]
+        )
+    )
+
+    deduplicated_df = deduplicated_df.drop(
+        columns=["phone_number_enriched"]
+    )
+
+    return deduplicated_df
+
+def enrich_nationality_fields(
+    df,
+    deduplicated_df
+):
+    """Enrich missing nationality values."""
+
+    nationality_df = (
+        df[
+            [
+                "document_type",
+                "document_number",
+                "nationality",
+                "source_priority"
+            ]
+        ]
+        .dropna(subset=["nationality"])
+        .sort_values(by="source_priority")
+        .drop_duplicates(
+            subset=[
+                "document_type",
+                "document_number"
+            ],
+            keep="first"
+        )
+    )
+
+    deduplicated_df = deduplicated_df.merge(
+        nationality_df[
+            [
+                "document_type",
+                "document_number",
+                "nationality"
+            ]
+        ],
+        on=[
+            "document_type",
+            "document_number"
+        ],
+        how="left",
+        suffixes=("", "_enriched")
+    )
+
+    deduplicated_df["nationality"] = (
+        deduplicated_df["nationality"]
+        .fillna(
+            deduplicated_df["nationality_enriched"]
+        )
+    )
+
+    deduplicated_df = deduplicated_df.drop(
+        columns=["nationality_enriched"]
+    )
+
+    return deduplicated_df

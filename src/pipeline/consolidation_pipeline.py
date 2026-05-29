@@ -17,7 +17,9 @@ from src.transform.consolidate import (
     review_duplicated_records,
     apply_source_priority,
     detect_unmapped_sources,
-    enrich_email_fields
+    enrich_email_fields,
+    enrich_phone_fields,
+    enrich_nationality_fields
 )
 
 from src.load.exporters import (
@@ -81,6 +83,50 @@ def run_consolidation_pipeline():
     emails_enriched = (
         emails_after_enrichment -
         emails_before_enrichment
+    )
+
+    phones_before_enrichment = (
+        deduplicated_df["phone_number"]
+        .notna()
+        .sum()
+    )
+
+    deduplicated_df = enrich_phone_fields(
+        prioritized_df,
+        deduplicated_df
+    )
+
+    phones_after_enrichment = (
+        deduplicated_df["phone_number"]
+        .notna()
+        .sum()
+    )
+
+    phones_enriched = (
+        phones_after_enrichment -
+        phones_before_enrichment
+    )
+
+    nationalities_before_enrichment = (
+        deduplicated_df["nationality"]
+        .notna()
+        .sum()
+    )
+
+    deduplicated_df = enrich_nationality_fields(
+        prioritized_df,
+        deduplicated_df
+    )
+
+    nationalities_after_enrichment = (
+        deduplicated_df["nationality"]
+        .notna()
+        .sum()
+    )
+
+    nationalities_enriched = (
+        nationalities_after_enrichment -
+        nationalities_before_enrichment
     )
 
     # ==============================
@@ -244,6 +290,34 @@ def run_consolidation_pipeline():
         f"{emails_enriched}"
     )
 
+    print("\n=== PHONE ENRICHMENT SUMMARY ===")
+
+    print(
+        f"Phones before enrichment: {phones_before_enrichment}"
+    )
+
+    print(
+        f"Phones after enrichment: {phones_after_enrichment}"
+    )
+
+    print(
+        f"Phones enriched: {phones_enriched}"
+    )
+
+    print("\n=== NATIONALITY ENRICHMENT SUMMARY ===")
+
+    print(
+        f"Nationalities before enrichment: {nationalities_before_enrichment}"
+    )
+
+    print(
+        f"Nationalities after enrichment: {nationalities_after_enrichment}"
+    )
+
+    print(
+        f"Nationalities enriched: {nationalities_enriched}"
+    )
+
     print("\n=== DEDUPLICATION SUMMARY ===")
 
     print(
@@ -264,7 +338,7 @@ def run_consolidation_pipeline():
     )
 
     # ==============================
-    # Consolidation Summary Report
+    # PipelineSummary Report
     # ==============================
 
     consolidation_summary_df = pd.DataFrame([
@@ -275,9 +349,35 @@ def run_consolidation_pipeline():
         }
     ])
 
+    enrichment_summary_df = pd.DataFrame([
+        {
+            "field": "email",
+            "before": emails_before_enrichment,
+            "after": emails_after_enrichment,
+            "enriched": emails_enriched
+        },
+        {
+            "field": "phone_number",
+            "before": phones_before_enrichment,
+            "after": phones_after_enrichment,
+            "enriched": phones_enriched
+        },
+        {
+            "field": "nationality",
+            "before": nationalities_before_enrichment,
+            "after": nationalities_after_enrichment,
+            "enriched": nationalities_enriched
+        }
+    ])
+
     summary_output_path = (
         REPORTS_OUTPUT_DIR /
         "consolidation_summary.csv"
+    )
+
+    enrichment_summary_output_path = (
+        REPORTS_OUTPUT_DIR /
+        "enrichment_summary.csv"
     )
 
     export_dataframe(
@@ -285,8 +385,16 @@ def run_consolidation_pipeline():
         summary_output_path
     )
 
+    export_dataframe(
+        enrichment_summary_df,
+        enrichment_summary_output_path
+    )
+
     print("\n=== CONSOLIDATION SUMMARY EXPORTED ===")
     print(summary_output_path)
+
+    print("\n=== ENRICHMENT SUMMARY EXPORTED ===")
+    print(enrichment_summary_output_path)
 
     logger.info(
         "Dataset consolidation pipeline completed"

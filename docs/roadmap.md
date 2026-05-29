@@ -2,58 +2,107 @@
 
 ## Current Stage
 
-Current pipeline is functional and operational, processing multiple educational graduate data sources and generating consolidated outputs for downstream systems.
+The pipeline is currently operational and capable of processing, validating, profiling, and consolidating multiple educational graduate datasets into a unified master dataset.
 
-The next objective is to progressively evolve the project into a reproducible and professional data pipeline aligned with Analytics Engineering and Data Engineering practices.
-
----
-
-## Phase 1 — Stabilization
-
-- Clean project structure
-- Reproducible environment
-- Git versioning
-- Centralized configuration
-- Logging
+The current focus is to improve maintainability, data quality, observability, and readiness for downstream consumption.
 
 ---
 
-## Phase 2 — Modularization
+## Phase 1 — Stabilization ✅
 
-- Extract reusable modules
-- Separate extract / transform / validate / load layers
-- Reduce duplicated logic
+Completed objectives:
 
----
-
-## Phase 3 — Data Quality Framework
-
-- DNI validation
-- Duplicate detection
-- Source consistency checks
-- Automated quality reports
+* Reproducible environment
+* Git versioning
+* Centralized configuration
+* Logging
+* Project structure definition
 
 ---
 
-## Phase 4 — Analytical Modeling
+## Phase 2 — Modularization ✅
 
-- Formal dimensional model
-- Fact and dimension tables
-- Standardized curated outputs
+Completed objectives:
 
----
-
-## Phase 5 — SQL Integration
-
-- PostgreSQL or SQLite integration
-- Hybrid SQL + Python transformations
-- Advanced analytical queries
+* Extract / Transform / Validate / Load separation
+* Reusable modules
+* Standardization layer
+* Consolidation layer
+* Pipeline organization
 
 ---
 
-## Phase 6 — Analytics Engineering
+## Phase 3 — Data Quality & Consolidation ✅
 
-- dbt
-- Testing
-- Documentation
-- Orchestration concepts
+Completed objectives:
+
+* Dataset profiling
+* Validation reports
+* Missing identity detection
+* Duplicate detection
+* Consolidated datasets
+* Source priority management
+* Survivorship rules
+* Email enrichment
+* Automated testing foundation
+
+---
+
+## Phase 4 — Data Product Readiness
+
+Objectives:
+
+* Additional field enrichment
+* Advanced survivorship rules
+* Pipeline KPIs
+* Quality monitoring
+* Architecture documentation
+* Output standardization
+* Improved execution entrypoints
+* Repository improvements
+
+---
+
+## Phase 5 — Analytical Modeling
+
+Objectives:
+
+* Curated datasets
+* Standardized analytical outputs
+* Fact and dimension design
+* Semantic data layer
+
+---
+
+## Phase 6 — Database Integration
+
+Objectives:
+
+* SQLite integration
+* PostgreSQL integration
+* SQL transformations
+* Incremental processing
+
+---
+
+## Phase 7 — Analytics Engineering
+
+Objectives:
+
+* dbt concepts
+* Automated testing expansion
+* Data contracts
+* Data lineage
+* Orchestration concepts
+
+---
+
+## Phase 8 — Production & Automation
+
+Objectives:
+
+* Scheduled executions
+* Cloud storage integration
+* API integration
+* Monitoring
+* Deployment automation

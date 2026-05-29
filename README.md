@@ -22,6 +22,53 @@ The project aims to progressively evolve into a reproducible and scalable data e
 
 ---
 
+## Current Pipeline Stages
+
+```text
+Raw Datasets
+    ↓
+Standardization
+    ↓
+Validation
+    ↓
+Profiling
+    ↓
+Consolidation
+    ↓
+Source Prioritization
+    ↓
+Field Enrichment
+    ↓
+Reports & Exports
+```
+
+## Standardization
+
+- Column normalization
+- Document type normalization
+- Gender normalization
+- Text field cleaning
+
+## Validation
+
+- Invalid document detection
+- Missing identity detection
+- Quality checks
+
+## Profiling
+
+- Dataset statistics
+- Null analysis
+- Profiling reports
+
+## Consolidation
+
+- Dataset concatenation
+- Duplicate removal
+- Source priority assignment
+- Email enrichment
+- Consolidated dataset generation
+  
 ## Project Structure
 
 ```text
@@ -130,11 +177,10 @@ Current version includes:
 
 Planned future improvements:
 
-- Advanced consolidation rules
-- Source priority management
-- Historical quality tracking
-- Automated testing
+- Advanced survivorship rules
+- Additional field enrichment
 - Pipeline orchestration
+- Quality monitoring
 - Performance optimization
 - API integration
 - Data warehouse integration

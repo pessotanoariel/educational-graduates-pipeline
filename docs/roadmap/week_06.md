@@ -2,11 +2,11 @@
 
 ## Day 1 — Historical Quality Monitoring
 
-- [ ] Create quality_history.csv
-- [ ] Store KPI evolution
-- [ ] Track monitoring history
-- [ ] Export historical reports
-- [ ] Review monitoring design
+- [X] Create quality_history.csv
+- [X] Store KPI evolution
+- [X] Track monitoring history
+- [X] Export historical reports
+- [X] Review monitoring design
 
 ## Day 2 — Test Expansion
 

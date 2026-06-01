@@ -1,5 +1,7 @@
 import pandas as pd
 
+from datetime import date
+
 from config.settings import (
     PROCESSED_DATA_DIR,
     CONSOLIDATED_OUTPUT_DIR,
@@ -23,7 +25,8 @@ from src.transform.consolidate import (
 )
 
 from src.load.exporters import (
-    export_dataframe
+    export_dataframe,
+    append_dataframe
 )
 
 from src.utils.logger import logger
@@ -133,7 +136,9 @@ def run_consolidation_pipeline():
     # Data Quality Monitoring
     # ==============================
 
-    total_records = len(deduplicated_df)
+    source_records = len(unified_df)
+
+    unique_people = len(deduplicated_df)
 
     email_coverage_pct = round(
         deduplicated_df["email"]
@@ -187,13 +192,13 @@ def run_consolidation_pipeline():
     )
 
     duplicates_removed = (
-        len(unified_df)
-        - len(deduplicated_df)
+        source_records
+        - unique_people
     )
 
     duplicate_records_pct = round(
         duplicates_removed
-        / len(unified_df)
+        / source_records
         * 100,
         2
     )
@@ -411,8 +416,8 @@ def run_consolidation_pipeline():
 
     consolidation_summary_df = pd.DataFrame([
         {
-            "total_records": len(unified_df),
-            "unique_people": len(deduplicated_df),
+            "total_records": source_records,
+            "unique_people": unique_people,
             "duplicates_removed": duplicates_removed
         }
     ])
@@ -463,8 +468,8 @@ def run_consolidation_pipeline():
     # ==============================
 
     quality_summary_df = pd.DataFrame([
-        {"metric": "total_records", "value": len(unified_df)},
-        {"metric": "unique_people", "value": len(deduplicated_df)},
+        {"metric": "total_records", "value": source_records},
+        {"metric": "unique_people", "value": unique_people},
         {"metric": "duplicates_removed", "value": duplicates_removed},
         {"metric": "email_coverage_pct", "value": email_coverage_pct},
         {"metric": "phone_coverage_pct", "value": phone_coverage_pct},
@@ -483,6 +488,29 @@ def run_consolidation_pipeline():
     export_dataframe(
         quality_summary_df,
         quality_summary_output_path
+    )
+
+    quality_history_df = pd.DataFrame([
+        {
+            "execution_date": date.today(),
+            "source_records": source_records,
+            "unique_people": unique_people,
+            "duplicate_records_pct": duplicate_records_pct,
+            "email_coverage_pct": email_coverage_pct,
+            "phone_coverage_pct": phone_coverage_pct,
+            "nationality_coverage_pct": nationality_coverage_pct,
+            "missing_document_type_pct": missing_document_type_pct
+        }
+    ])
+
+    quality_history_output_path = (
+        REPORTS_OUTPUT_DIR /
+        "quality_history.csv"
+    )
+
+    append_dataframe(
+        quality_history_df,
+        quality_history_output_path
     )
 
     print("\n=== CONSOLIDATION SUMMARY EXPORTED ===")

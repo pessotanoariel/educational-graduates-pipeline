@@ -71,10 +71,14 @@ Current enrichment logic includes:
 
 * Email recovery
 
+Current enrichment logic includes:
+
+* Email recovery
+* Phone recovery
+* Nationality recovery
+
 Future enrichment candidates include:
 
-* Phone number
-* Nationality
 * Birth date
 
 ---

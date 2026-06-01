@@ -153,6 +153,12 @@ python -m src.validate.profiling
 Run consolidation pipeline:
 
 ```bash
+python main.py
+```
+
+Alternative execution:
+
+```bash
 python -m src.transform.run_consolidation
 ```
 
@@ -198,6 +204,9 @@ Current version includes:
 - Record deduplication
 - Consolidation summary reporting
 - Centralized configuration and logging
+- Data quality monitoring
+- Technical documentation
+- Architecture documentation
 
 ---
 

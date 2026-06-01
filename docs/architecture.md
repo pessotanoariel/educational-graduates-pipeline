@@ -65,8 +65,6 @@ Main components:
 
 ---
 
----
-
 ## Data Flow
 
 The pipeline follows a staged processing workflow designed to progressively improve data quality and consolidate information from multiple educational sources.

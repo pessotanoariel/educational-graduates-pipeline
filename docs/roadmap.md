@@ -130,3 +130,18 @@ Completed:
 Status:
 
 Ready for analytical modeling phase.
+
+### v1.1 — Publication & Monitoring Layer ✅
+
+Completed:
+
+* Operational dataset publication
+* Historical dataset snapshots
+* Publication layer architecture
+* Monitoring workbook
+* Power Query integration
+* Legacy output compatibility
+
+Status:
+
+Ready for analytical modeling phase.

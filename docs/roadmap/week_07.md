@@ -23,21 +23,21 @@ The objective is to complete the original project vision:
 
 ## Day 2 — Publication Layer Design
 
-* [ ] Design publish workflow
-* [ ] Define latest dataset structure
-* [ ] Define historical dataset structure
-* [ ] Define naming conventions
-* [ ] Document publication rules
+* [X] Design publish workflow
+* [X] Define latest dataset structure
+* [X] Define historical dataset structure
+* [X] Define naming conventions
+* [X] Document publication rules
 
 ---
 
 ## Day 3 — Operational Dataset Generation
 
-* [ ] Create publication module
-* [ ] Generate latest dataset
-* [ ] Generate historical snapshots
-* [ ] Validate compatibility with legacy outputs
-* [ ] Review exported schema
+* [X] Create publication module
+* [X] Generate latest dataset
+* [X] Generate historical snapshots
+* [X] Validate compatibility with legacy outputs
+* [X] Review exported schema
 
 ---
 
@@ -53,11 +53,11 @@ The objective is to complete the original project vision:
 
 ## Day 5 — Release Review
 
-* [ ] Review publication layer
-* [ ] Validate exported datasets
-* [ ] Review monitoring workbook
-* [ ] Update technical backlog
-* [ ] Prepare v1.1 milestone
+* [X] Review publication layer
+* [X] Validate exported datasets
+* [X] Review monitoring workbook
+* [X] Update technical backlog
+* [X] Prepare v1.1 milestone
 
 ---
 
@@ -65,8 +65,8 @@ The objective is to complete the original project vision:
 
 ### Operational Outputs
 
-* latest.csv
-* historical snapshots
+* base_graduados_unificada_latest.csv
+* historical graduate snapshots
 
 ### Analytical Outputs
 

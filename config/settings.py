@@ -29,6 +29,14 @@ CONSOLIDATED_OUTPUT_DIR = (
     OUTPUT_DATA_DIR / "consolidated"
 )
 
+PUBLISHED_OUTPUT_DIR = (
+    OUTPUT_DATA_DIR / "published"
+)
+
+HISTORICAL_OUTPUT_DIR = (
+    OUTPUT_DATA_DIR / "historical"
+)
+
 # ==============================
 # Logs
 # ==============================

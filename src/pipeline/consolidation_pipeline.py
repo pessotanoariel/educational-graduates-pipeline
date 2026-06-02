@@ -6,7 +6,9 @@ from config.settings import (
     PROCESSED_DATA_DIR,
     CONSOLIDATED_OUTPUT_DIR,
     REPORTS_OUTPUT_DIR,
-    VALIDATION_OUTPUT_DIR
+    VALIDATION_OUTPUT_DIR,
+    PUBLISHED_OUTPUT_DIR,
+    HISTORICAL_OUTPUT_DIR
 )
 
 from src.transform.consolidate import (
@@ -30,6 +32,10 @@ from src.load.exporters import (
 )
 
 from src.utils.logger import logger
+
+from src.transform.publish import (
+    build_operational_dataset
+)
 
 def run_consolidation_pipeline():
     """Run dataset consolidation pipeline."""
@@ -325,6 +331,44 @@ def run_consolidation_pipeline():
 
     print("\n=== SAMPLE ROWS ===")
     print(unified_df.head())
+
+    # ==============================
+    # Operational Dataset
+    # ==============================
+
+    operational_df = build_operational_dataset(
+        deduplicated_df
+    )
+
+    # ==============================
+    # Export Operational Dataset
+    # ==============================
+
+    latest_output_path = (
+        PUBLISHED_OUTPUT_DIR /
+        "base_graduados_unificada_latest.csv"
+    )
+
+    export_dataframe(
+        operational_df,
+        latest_output_path
+    )
+
+    historical_output_path = (
+        HISTORICAL_OUTPUT_DIR /
+        f"base_graduados_unificada_{date.today()}.csv"
+    )
+
+    export_dataframe(
+        operational_df,
+        historical_output_path
+    )
+
+    print("\n=== OPERATIONAL DATASET EXPORTED ===")
+    print(latest_output_path)
+
+    print("\n=== HISTORICAL DATASET EXPORTED ===")
+    print(historical_output_path)
 
     # ==============================
     # Export Consolidated Dataset

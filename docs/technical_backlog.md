@@ -18,6 +18,7 @@ Future improvements identified during project reviews.
 * [ ] Add validation tests
 * [ ] Add phone enrichment tests
 * [ ] Add nationality enrichment tests
+* [ ] Add publication layer tests
 * [ ] Add coverage.py reporting
 
 ---

@@ -52,7 +52,10 @@ for dataset_path in dataset_paths:
 # Dataset Transformation
 # ==============================
 
-    standardized_df = transform_dataset(df)
+    standardized_df = transform_dataset(
+        df,
+        dataset_name=dataset_path.name
+    )
 
     processed_output_path = (
         PROCESSED_DATA_DIR /

@@ -140,6 +140,33 @@ def normalize_document_type(df):
 
     return df
 
+def infer_document_type(
+    df,
+    dataset_name=None
+):
+    """Apply source-specific document type rules."""
+
+    microcredentials_sources = [
+        "graduados_microcredenciales_historico.xlsx",
+        "graduados_microcredenciales_2026.xlsx"
+    ]
+
+    if dataset_name not in microcredentials_sources:
+        return df
+
+    if "document_type" not in df.columns:
+
+        df["document_type"] = "DNI"
+
+    else:
+
+        df["document_type"] = (
+            df["document_type"]
+            .fillna("DNI")
+        )
+
+    return df
+
 def normalize_document_number(df):
     """Clean and normalize document number values."""
 
@@ -218,7 +245,8 @@ def normalize_text_fields(df):
 
     return df
 
-def transform_dataset(df):
+def transform_dataset(df, dataset_name=None):
+
     """Apply standardization and normalization transformations."""
 
     transformed_df = standardize_column_names(df)
@@ -229,6 +257,11 @@ def transform_dataset(df):
 
     transformed_df = normalize_document_type(
         transformed_df
+    )
+
+    transformed_df = infer_document_type(
+    transformed_df,
+    dataset_name
     )
 
     transformed_df = normalize_gender(

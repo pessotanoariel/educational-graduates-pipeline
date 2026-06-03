@@ -37,6 +37,10 @@ HISTORICAL_OUTPUT_DIR = (
     OUTPUT_DATA_DIR / "historical"
 )
 
+CURATED_OUTPUT_DIR = (
+    OUTPUT_DATA_DIR / "curated"
+)
+
 # ==============================
 # Logs
 # ==============================

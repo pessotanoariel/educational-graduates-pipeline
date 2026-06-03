@@ -8,7 +8,8 @@ from config.settings import (
     REPORTS_OUTPUT_DIR,
     VALIDATION_OUTPUT_DIR,
     PUBLISHED_OUTPUT_DIR,
-    HISTORICAL_OUTPUT_DIR
+    HISTORICAL_OUTPUT_DIR,
+    CURATED_OUTPUT_DIR
 )
 
 from src.transform.consolidate import (
@@ -35,6 +36,10 @@ from src.utils.logger import logger
 
 from src.transform.publish import (
     build_operational_dataset
+)
+
+from src.transform.curated import (
+    build_curated_dataset
 )
 
 def run_consolidation_pipeline():
@@ -370,6 +375,31 @@ def run_consolidation_pipeline():
     print("\n=== HISTORICAL DATASET EXPORTED ===")
     print(historical_output_path)
 
+    # ==============================
+    # Curated Dataset
+    # ==============================
+
+    curated_df = build_curated_dataset(
+        deduplicated_df
+    )
+
+    print("\n=== CURATED DATASET ===")
+    print(curated_df.head())
+
+    print(curated_df.columns.tolist())
+
+    print(len(curated_df))
+
+    curated_output_path = (
+        CURATED_OUTPUT_DIR /
+        "graduates_curated.csv"
+    )
+
+    export_dataframe(
+        curated_df,
+        curated_output_path
+    )
+    
     # ==============================
     # Export Consolidated Dataset
     # ==============================

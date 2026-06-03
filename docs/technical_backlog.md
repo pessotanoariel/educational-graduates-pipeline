@@ -28,3 +28,14 @@ Future improvements identified during project reviews.
 * [ ] Create monitoring trend reports
 
 ---
+
+## Curated Layer
+
+* [ ] Create graduates_curated.csv
+* [ ] Define derived analytical attributes
+* [ ] Create age groups
+* [ ] Create contact completeness flags
+* [ ] Create graduation year attribute
+* [ ] Evaluate analytical summary datasets
+
+---

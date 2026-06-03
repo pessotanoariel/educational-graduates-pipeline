@@ -33,28 +33,28 @@ The objective is to begin the transition from a data product into an analytics-r
 * [X] Create README.md in Spanish
 * [X] Create README_EN.md
 * [X] Review repository navigation
-* [ ] Review portfolio presentation
-* [ ] Review screenshots and documentation
+* [X] Review portfolio presentation
+* [X] Review screenshots and documentation
 
 ---
 
 ## Day 4 — Analytical Metrics Exploration
 
-* [ ] Analyze graduates by source
-* [ ] Analyze graduates by education sector
-* [ ] Analyze graduates by institution
-* [ ] Define analytical KPIs
-* [ ] Review reporting opportunities
+* [X] Analyze graduates by source
+* [X] Analyze graduates by education sector
+* [X] Analyze graduates by institution
+* [X] Define analytical KPIs
+* [X] Review reporting opportunities
 
 ---
 
 ## Day 5 — Phase 5 Planning Review
 
-* [ ] Review analytical modeling roadmap
-* [ ] Review technical backlog
-* [ ] Review future data sources
-* [ ] Prepare curated layer backlog
-* [ ] Prepare Phase 5 milestone
+* [X] Review analytical modeling roadmap
+* [X] Review technical backlog
+* [X] Review future data sources
+* [X] Prepare curated layer backlog
+* [X] Prepare Phase 5 milestone
 
 ---
 

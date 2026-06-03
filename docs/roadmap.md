@@ -70,9 +70,13 @@ Completed objectives:
 Objectives:
 
 * Curated datasets
+* Business entities definition
+* Analytical dimensions
+* Derived analytical attributes
 * Standardized analytical outputs
 * Fact and dimension design
 * Semantic data layer
+* Reporting foundations
 
 ---
 

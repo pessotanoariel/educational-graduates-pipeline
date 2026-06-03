@@ -1,42 +1,33 @@
-# Educational Graduates Pipeline
+# Pipeline de Graduados Educativos
 
-## Project Overview
+## Descripción General
 
-Educational Graduates Pipeline is a modular data pipeline designed to process, validate, profile, and consolidate educational graduates datasets from multiple heterogeneous sources.
+Pipeline de datos modular diseñado para procesar, validar, perfilar, consolidar y publicar datasets de graduados provenientes de múltiples fuentes educativas heterogéneas.
 
-The project aims to progressively evolve into a reproducible and scalable data engineering workflow for educational analytics and graduate validation processes.
+El proyecto surgió para automatizar la consolidación de registros educativos, mejorar la calidad de los datos y generar datasets estables tanto para consumo operativo como para análisis.
 
----
-
-## Documentation
-
-Additional project documentation is available under:
-
-- docs/architecture.md
-- docs/consolidation_logic.md
-- docs/roadmap.md
-
-## Current Features
-
-- Multi-source dataset processing
-- Automatic dataset discovery
-- Modular dataset loaders
-- Dataset profiling
-- Data quality validations
-- Invalid record exports
-- Profiling summary reports
-- Execution logging
-- Centralized project configuration
-- Dataset consolidation
-- Source prioritization
-- Record deduplication
-- Field enrichment
-- Data quality monitoring
-- Quality reporting
+Actualmente funciona como un Data Product con capacidades de monitoreo, enriquecimiento y publicación de datos.
 
 ---
 
-## Current Pipeline Stages
+## Principales Capacidades
+
+* Procesamiento de múltiples fuentes de graduados
+* Descubrimiento automático de datasets
+* Estandarización y normalización de datos
+* Perfilado automático de datasets
+* Validaciones de calidad
+* Detección de registros inválidos
+* Consolidación y deduplicación de personas
+* Priorización de fuentes
+* Enriquecimiento de información de contacto
+* Monitoreo de calidad histórico
+* Generación de datasets operativos y analíticos
+* Arquitectura modular y testeable
+
+---
+
+## Arquitectura General
 
 ```text
 Raw Datasets
@@ -57,84 +48,130 @@ Deduplication
       ↓
 Field Enrichment
       ↓
-Data Quality Monitoring
+Curated Layer
       ↓
-Reports & Exports
+Publication Layer
+      ↓
+Monitoring & Reports
 ```
 
-## Standardization
+---
 
-- Column normalization
-- Document type normalization
-- Gender normalization
-- Text field cleaning
+## Capas del Proyecto
 
-## Validation
+### Consolidated Layer
 
-- Invalid document detection
-- Missing identity detection
-- Quality checks
+```text
+data/output/consolidated/
+```
 
-## Profiling
+Dataset técnico consolidado que preserva la totalidad de los atributos disponibles y la trazabilidad de las fuentes.
 
-- Dataset statistics
-- Null analysis
-- Profiling reports
+Archivo principal:
 
-## Consolidation
+```text
+unified_graduates_dataset.csv
+```
 
-- Dataset concatenation
-- Source priority assignment
-- Record deduplication
-- Email enrichment
-- Phone enrichment
-- Nationality enrichment
-  
-## Project Structure
+---
+
+### Curated Layer
+
+Diseñada para consumo analítico.
+
+Documentación:
+
+```text
+docs/curated_layer.md
+```
+
+Dataset planificado:
+
+```text
+graduates_curated.csv
+```
+
+---
+
+### Publication Layer
+
+Genera datasets estables para sistemas consumidores.
+
+Dataset operativo:
+
+```text
+data/output/published/base_graduados_unificada_latest.csv
+```
+
+Snapshots históricos:
+
+```text
+data/output/historical/
+```
+
+---
+
+### Monitoring Layer
+
+Genera reportes automáticos de calidad y monitoreo.
+
+Principales outputs:
+
+* quality_summary.csv
+* quality_history.csv
+* enrichment_summary.csv
+* null_distribution_report.csv
+* duplicated_records_report.csv
+
+---
+
+## Estructura del Proyecto
 
 ```text
 project/
 │
-├── config/         # Centralized project settings
+├── config/
 ├── data/
-│   ├── raw/        # Raw input datasets
-│   ├── processed/  # Intermediate processed datasets
-│   └── output/     # Pipeline outputs and reports
+│   ├── raw/
+│   ├── processed/
+│   └── output/
 │       ├── consolidated/
+│       ├── historical/
 │       ├── profiling/
+│       ├── published/
 │       ├── reports/
 │       └── validation/
 │
-├── docs/           # Technical documentation and roadmap
-├── logs/           # Execution logs
-├── notebooks/      # Exploratory notebooks
+├── docs/
+├── logs/
+├── monitoring/
+├── notebooks/
 ├── src/
-│   ├── extract/    # Dataset loaders
-│   ├── load/       # Export utilities
-│   ├── transform/  # Dataset transformation and consolidation
-│   ├── utils/      # Shared utilities
-│   └── validate/   # Profiling and quality checks
+├── tests/
 │
-├── tests/          # Future automated tests
 ├── main.py
+├── README.md
+├── README_EN.md
 └── requirements.txt
 ```
 
-## Installation
+---
 
-Create virtual environment:
+## Instalación
+
+Crear entorno virtual:
 
 ```bash
 python -m venv venv
 ```
 
-Activate virtual environment:
+Activar entorno:
 
 ```bash
 source venv/Scripts/activate
 ```
 
-Install dependencies:
+Instalar dependencias:
 
 ```bash
 pip install -r requirements.txt
@@ -142,84 +179,72 @@ pip install -r requirements.txt
 
 ---
 
-## Usage
+## Ejecución
 
-Run profiling pipeline:
-
-```bash
-python -m src.validate.profiling
-```
-
-Run consolidation pipeline:
+Ejecución completa:
 
 ```bash
 python main.py
 ```
 
-Alternative execution:
-
-```bash
-python -m src.transform.run_consolidation
-```
-
 ---
 
-## Outputs
+## Outputs Principales
 
-The pipeline automatically generates:
-
-- Processed standardized datasets
-- Profiling summary reports
-- Validation reports
-- Consolidated datasets
-- Deduplication summaries
-- Consolidation reports
-- Execution logs
-
-Outputs are stored in:
+### Operativos
 
 ```text
-data/output/
+base_graduados_unificada_latest.csv
 ```
 
-### Monitoring Reports
+Utilizado para validación de graduados por sistemas consumidores.
 
-- Quality summary reports
-- Null distribution reports
-- Duplicate record reports
-- Enrichment summary reports
+### Analíticos
 
----
+```text
+unified_graduates_dataset.csv
+```
 
-## Current Status
+Dataset enriquecido para análisis y monitoreo.
 
-Current version includes:
+### Monitoreo
 
-- Multi-source dataset ingestion
-- Dataset standardization and normalization
-- Modular transformation architecture
-- Data quality validations
-- Processed dataset generation
-- Dataset consolidation
-- Record deduplication
-- Consolidation summary reporting
-- Centralized configuration and logging
-- Data quality monitoring
-- Technical documentation
-- Architecture documentation
+Reportes automáticos de calidad, duplicados, cobertura y enriquecimiento.
 
 ---
 
-## Next Steps
+## Documentación
 
-Planned future improvements:
+* docs/architecture.md
+* docs/consolidation_logic.md
+* docs/curated_layer.md
+* docs/roadmap.md
+* docs/technical_backlog.md
 
-- Advanced survivorship rules
-- Additional field enrichment
-- Pipeline orchestration
-- Quality monitoring
-- Performance optimization
-- API integration
-- Data warehouse integration
-  
 ---
+
+## Estado Actual
+
+Versión actual:
+
+```text
+v1.1
+```
+
+Estado:
+
+```text
+Publication Layer completa
+Monitoring Layer operativa
+Inicio de Phase 5 — Analytical Modeling
+```
+
+---
+
+## Próximos Pasos
+
+* Diseño de datasets curados
+* Modelado analítico
+* Integración con bases de datos
+* Analytics Engineering
+* Automatización y despliegue

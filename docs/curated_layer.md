@@ -69,15 +69,22 @@ Purpose:
 
 ---
 
-## Derived Attributes (Future)
+## Derived Attributes
 
-Potential derived fields:
+Implemented:
+
+* contact_available
+* contact_completeness
+
+Evaluated but not implemented:
 
 * age
 * age_group
-* contact_available
-* contact_completeness
 * graduation_year
+
+Reason:
+
+Current source data quality does not provide sufficient consistency for reliable age derivation and graduation year standardization across all datasets.
 
 ---
 
@@ -85,7 +92,6 @@ Potential derived fields:
 
 Examples:
 
-* source_file
 * source_priority
 * badge_id
 * event_id

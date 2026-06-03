@@ -39,7 +39,8 @@ from src.transform.publish import (
 )
 
 from src.transform.curated import (
-    build_curated_dataset
+    build_curated_dataset,
+    add_derived_attributes
 )
 
 def run_consolidation_pipeline():
@@ -383,6 +384,10 @@ def run_consolidation_pipeline():
         deduplicated_df
     )
 
+    curated_df = add_derived_attributes(
+        curated_df
+    )
+
     print("\n=== CURATED DATASET ===")
     print(curated_df.head())
 
@@ -399,7 +404,7 @@ def run_consolidation_pipeline():
         curated_df,
         curated_output_path
     )
-    
+
     # ==============================
     # Export Consolidated Dataset
     # ==============================

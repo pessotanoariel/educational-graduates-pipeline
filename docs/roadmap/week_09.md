@@ -30,11 +30,11 @@ The objective is to expose business-oriented attributes and reduce technical com
 
 ## Day 3 — Derived Attributes
 
-* [ ] Create contact_available flag
-* [ ] Create contact_completeness flag
-* [ ] Review age calculation feasibility
-* [ ] Review graduation_year derivation
-* [ ] Document derived attributes
+[x] Review age calculation feasibility
+[x] Exclude age from scope
+[x] Review graduation_year derivation
+[x] Exclude graduation_year from scope
+[x] Document derived attributes
 
 ---
 

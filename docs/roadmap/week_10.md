@@ -30,11 +30,11 @@ for future public release and portfolio presentation.
 
 ## Day 3 — Semantic Layer Foundations
 
-* [ ] Review analytical attributes
-* [ ] Review derived attributes
-* [ ] Review business terminology
-* [ ] Review analytical definitions
-* [ ] Document semantic layer foundations
+* [X] Review analytical attributes
+* [X] Review derived attributes
+* [X] Review business terminology
+* [X] Review analytical definitions
+* [X] Document semantic layer foundations
 
 ---
 

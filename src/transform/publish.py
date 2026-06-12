@@ -15,6 +15,13 @@ def build_operational_dataset(df):
     )
 
     operational_df = operational_df[
+        operational_df["document_number"]
+        .fillna("")
+        .str.strip()
+        != ""
+    ]
+
+    operational_df = operational_df[
         [
             "clave_persona",
             "document_type",
@@ -24,6 +31,11 @@ def build_operational_dataset(df):
             "graduated"
         ]
     ]
+
+    operational_df["gender"] = (
+        operational_df["gender"]
+        .fillna("sin_datos")
+    )
 
     operational_df = operational_df.rename(
         columns={

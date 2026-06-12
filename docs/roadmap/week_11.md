@@ -9,11 +9,11 @@ privacy, documentation, portfolio presentation, and open-source readiness.
 
 ## Day 1 — Repository Audit
 
-* [ ] Review repository structure
-* [ ] Review ignored files
-* [ ] Review sensitive outputs
-* [ ] Review hardcoded paths
-* [ ] Review publication risks
+* [X] Review repository structure
+* [X] Review ignored files
+* [X] Review sensitive outputs
+* [X] Review hardcoded paths
+* [X] Review publication risks
 
 ---
 

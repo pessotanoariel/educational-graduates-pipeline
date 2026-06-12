@@ -2,12 +2,18 @@
 .venv/
 venv/
 
+# Environment variables
 .env
+.env.*
 
 # Python cache
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# Coverage
+.coverage
+htmlcov/
 
 # Logs
 logs/
@@ -40,3 +46,6 @@ tmp/
 !data/output/profiling/.gitkeep
 !data/output/reports/.gitkeep
 !data/output/validation/.gitkeep
+
+# Local monitoring artifacts
+monitoring/

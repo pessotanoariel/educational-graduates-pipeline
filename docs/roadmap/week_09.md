@@ -40,21 +40,21 @@ The objective is to expose business-oriented attributes and reduce technical com
 
 ## Day 4 — Analytical Outputs
 
-* [ ] Review analytical reporting requirements
-* [ ] Evaluate summary datasets
-* [ ] Design graduates_summary dataset
-* [ ] Review aggregation opportunities
-* [ ] Document analytical outputs
+* [X] Review analytical reporting requirements
+* [X] Evaluate summary datasets
+* [X] Design graduates_summary dataset
+* [X] Review aggregation opportunities
+* [X] Document analytical outputs
 
 ---
 
 ## Day 5 — Phase 5 Review
 
-* [ ] Review curated layer implementation
-* [ ] Review technical backlog
-* [ ] Review analytical roadmap
-* [ ] Review future analytical use cases
-* [ ] Prepare v1.2 milestone
+* [X] Review curated layer implementation
+* [X] Review technical backlog
+* [X] Review analytical roadmap
+* [X] Review future analytical use cases
+* [X] Prepare v1.2 milestone
 
 ---
 

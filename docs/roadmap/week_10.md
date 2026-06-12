@@ -20,11 +20,11 @@ for future public release and portfolio presentation.
 
 ## Day 2 — Analytical Dimensions Review
 
-* [ ] Review identity dimensions
-* [ ] Review academic dimensions
-* [ ] Review institutional dimensions
-* [ ] Review source dimensions
-* [ ] Document analytical dimensions
+* [X] Review identity dimensions
+* [X] Review academic dimensions
+* [X] Review institutional dimensions
+* [X] Review source dimensions
+* [X] Document analytical dimensions
 
 ---
 

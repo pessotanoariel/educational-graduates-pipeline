@@ -40,21 +40,21 @@ for future public release and portfolio presentation.
 
 ## Day 4 — Portfolio Readiness Review
 
-* [ ] Review repository structure
-* [ ] Review output exposure risks
-* [ ] Review public dataset strategy
-* [ ] Review documentation completeness
-* [ ] Prepare public release checklist
+* [X] Review repository structure
+* [X] Review output exposure risks
+* [X] Review public dataset strategy
+* [X] Review documentation completeness
+* [X] Prepare public release checklist
 
 ---
 
 ## Day 5 — Phase 5 Review
 
-* [ ] Review analytical modeling phase
-* [ ] Review technical backlog
-* [ ] Review roadmap alignment
-* [ ] Prepare v1.3 milestone
-* [ ] Define Phase 6 entry criteria
+* [X] Review analytical modeling phase
+* [X] Review technical backlog
+* [X] Review roadmap alignment
+* [X] Prepare v1.3 milestone
+* [X] Define Phase 6 entry criteria
 
 ---
 

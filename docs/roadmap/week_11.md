@@ -19,11 +19,11 @@ privacy, documentation, portfolio presentation, and open-source readiness.
 
 ## Day 2 — Security & Privacy Review
 
-* [ ] Review personal data exposure
-* [ ] Review generated outputs
-* [ ] Review sample data strategy
-* [ ] Review repository safety
-* [ ] Define publication rules
+* [X] Review personal data exposure
+* [X] Review generated outputs
+* [X] Review sample data strategy
+* [X] Review repository safety
+* [X] Define publication rules
 
 ---
 

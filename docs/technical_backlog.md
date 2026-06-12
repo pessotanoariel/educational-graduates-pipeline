@@ -31,11 +31,16 @@ Future improvements identified during project reviews.
 
 ## Curated Layer
 
-* [ ] Create graduates_curated.csv
-* [ ] Define derived analytical attributes
-* [ ] Create age groups
-* [ ] Create contact completeness flags
-* [ ] Create graduation year attribute
 * [ ] Evaluate analytical summary datasets
+
+---
+
+## Portfolio Readiness
+
+* [ ] Public repository audit
+* [ ] Create public dataset policy
+* [ ] Review sample data strategy
+* [ ] Security review
+* [ ] Open-source readiness review
 
 ---

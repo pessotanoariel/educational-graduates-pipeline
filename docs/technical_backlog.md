@@ -37,33 +37,14 @@ Future improvements identified during project reviews and repository audits.
 
 ## Documentation
 
-* [ ] Fix README encoding issues
-* [ ] Fix documentation encoding issues
-* [ ] Complete publication_layer.md
 * [ ] Add output schema examples
 * [ ] Add input schema examples
-* [ ] Add project limitations section
-* [ ] Add recruiter-oriented project summary
 
 ---
 
 ## Open Source Readiness
 
-* [x] Public repository audit
-
-* [x] Security review
-
-* [x] Open-source readiness review
-
-* [ ] Add LICENSE
-
-* [ ] Create public dataset policy
-
-* [ ] Review sample data strategy
-
 * [ ] Add synthetic sample dataset strategy
-
-* [ ] Add repository release checklist review
 
 ---
 
@@ -74,3 +55,9 @@ Future improvements identified during project reviews and repository audits.
 * [ ] Add schema validation layer
 * [ ] Add sample datasets
 * [ ] Add CLI entrypoints
+
+## Portfolio Improvements
+
+* [ ] Add architecture diagram
+* [ ] Add repository screenshots
+* [ ] Add sample execution screenshots

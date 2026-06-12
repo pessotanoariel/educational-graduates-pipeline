@@ -44,13 +44,13 @@ Deliverables:
 
 * [X] Review README.md
 * [X] Review README_EN.md
-* [ ] Review docs completeness
-* [ ] Review onboarding experience
-* [ ] Review portfolio presentation
-* [ ] Fix documentation encoding issues
-* [ ] Review publication_layer.md
-* [ ] Add project limitations section
-* [ ] Add recruiter-oriented project summary
+* [X] Review docs completeness
+* [X] Review onboarding experience
+* [X] Review portfolio presentation
+* [X] Fix documentation encoding issues
+* [X] Review publication_layer.md
+* [X] Add project limitations section
+* [X] Add recruiter-oriented project summary
 
 ---
 

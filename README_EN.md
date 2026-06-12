@@ -1,33 +1,87 @@
 # Educational Graduates Pipeline
 
-## Overview
+A data engineering project designed to consolidate graduate records from multiple heterogeneous educational sources into a unified, validated, and analytics-ready dataset.
 
-Educational Graduates Pipeline is a modular data pipeline designed to process, validate, profile, consolidate, enrich, and publish educational graduate datasets from multiple heterogeneous sources.
+The project was created to solve a real-world educational data integration problem, where multiple operational systems generated duplicate, incomplete, or inconsistent information about the same individual.
 
-The project was developed to automate graduate data consolidation, improve data quality, and generate stable datasets for both operational and analytical consumption.
+It currently operates as a Data Product with profiling, validation, consolidation, enrichment, monitoring, and publication capabilities.
 
-It currently operates as a Data Product with monitoring, publication, and quality control capabilities.
+---
+
+## Problem Statement
+
+Educational organizations often manage graduate information across multiple independent systems.
+
+This creates challenges such as:
+
+* Duplicate records
+* Incomplete information
+* Inconsistent schemas across sources
+* Limited traceability
+* Difficulty producing reliable reporting
+
+This project addresses those challenges through a reproducible and well-documented data pipeline.
 
 ---
 
 ## Key Features
 
-* Multi-source dataset processing
+* Multi-source graduate processing
 * Automatic dataset discovery
 * Data standardization and normalization
-* Dataset profiling
+* Automated data profiling
 * Data quality validation
-* Record deduplication
+* Invalid record detection
+* Person consolidation and deduplication
 * Source prioritization
-* Field enrichment
+* Survivorship rules
+* Contact information enrichment
 * Historical quality monitoring
 * Operational dataset publication
-* Analytical dataset generation
+* Analytics-ready dataset generation
 * Modular and testable architecture
 
 ---
 
-## Architecture
+## Project Results
+
+Current production-scale metrics:
+
+* 800,000+ source records processed
+* 379,000+ unique graduates consolidated
+* 420,000+ duplicate records removed
+* Automated email enrichment
+* Automated phone enrichment
+* Automated nationality enrichment
+* Historical monitoring and quality reporting
+
+---
+
+## Technologies
+
+* Python
+* Pandas
+* Pytest
+* Pathlib
+* Logging
+* Power Query
+* Git
+
+Applied concepts:
+
+* ETL
+* Data Quality
+* Data Profiling
+* Data Validation
+* Data Consolidation
+* Deduplication
+* Survivorship Rules
+* Data Product Design
+* Analytical Modeling
+
+---
+
+## High-Level Architecture
 
 ```text
 Raw Datasets
@@ -66,14 +120,26 @@ Technical dataset preserving all available attributes and source lineage.
 Main output:
 
 ```text
-data/output/consolidated/unified_graduates_dataset.csv
+unified_graduates_dataset.csv
+```
+
+Documentation:
+
+```text
+docs/consolidation_logic.md
 ```
 
 ---
 
 ### Curated Layer
 
-Analytics-ready datasets designed for reporting and business analysis.
+Analytics-ready dataset optimized for reporting and business analysis.
+
+Main output:
+
+```text
+graduates_curated.csv
+```
 
 Documentation:
 
@@ -85,32 +151,31 @@ docs/curated_layer.md
 
 ### Publication Layer
 
-Stable datasets intended for downstream systems.
+Stable operational dataset intended for downstream systems.
 
-Operational dataset:
+Main output:
 
 ```text
-data/output/published/base_graduados_unificada_latest.csv
+base_graduados_unificada_latest.csv
 ```
 
-Historical snapshots:
+Documentation:
 
 ```text
-data/output/historical/
+docs/publication_layer.md
 ```
 
 ---
 
 ### Monitoring Layer
 
-Automated quality and monitoring reports.
+Produces historical quality and coverage reports.
 
-Main outputs:
+Examples:
 
-* quality_summary.csv
 * quality_history.csv
+* quality_summary.csv
 * enrichment_summary.csv
-* null_distribution_report.csv
 * duplicated_records_report.csv
 
 ---
@@ -122,10 +187,11 @@ project/
 │
 ├── config/
 ├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── output/
+│
 ├── docs/
-├── logs/
-├── monitoring/
-├── notebooks/
 ├── src/
 ├── tests/
 │
@@ -159,9 +225,9 @@ pip install -r requirements.txt
 
 ---
 
-## Usage
+## Execution
 
-Run the complete pipeline:
+Run the pipeline:
 
 ```bash
 python main.py
@@ -169,62 +235,105 @@ python main.py
 
 ---
 
-## Main Outputs
+## Privacy & Data Handling
 
-### Operational Dataset
+This repository does not include real datasets.
 
-```text
-base_graduados_unificada_latest.csv
-```
+Production datasets contain personally identifiable information (PII) and are excluded from version control through repository policies and Git ignore rules.
 
-Used by downstream systems to validate graduate records.
-
-### Analytical Dataset
+For additional information:
 
 ```text
-unified_graduates_dataset.csv
+docs/privacy_review.md
+docs/publication_rules.md
 ```
-
-Enriched dataset designed for analysis and monitoring.
-
-### Monitoring Reports
-
-Automated reports for quality, enrichment, duplicate detection, and historical monitoring.
 
 ---
 
 ## Documentation
 
+### Architecture
+
 * docs/architecture.md
 * docs/consolidation_logic.md
+* docs/publication_layer.md
 * docs/curated_layer.md
+
+### Analytical Modeling
+
+* docs/analytical_entities.md
+* docs/analytical_dimensions.md
+* docs/semantic_layer.md
+
+### Governance & Publication
+
+* docs/privacy_review.md
+* docs/publication_rules.md
+* docs/public_release_checklist.md
+
+### Roadmap
+
 * docs/roadmap.md
 * docs/technical_backlog.md
 
 ---
 
+## Current Limitations
+
+The project currently:
+
+* Does not include database integration
+* Does not implement incremental processing
+* Does not include workflow orchestration
+* Does not include CI/CD pipelines
+* Does not provide sample datasets
+
+These capabilities are planned for future roadmap phases.
+
+---
+
 ## Current Status
 
-Version:
+Current version:
 
 ```text
-v1.1
+v1.3 — Analytical Modeling Foundation
 ```
 
 Status:
 
 ```text
-Publication Layer completed
-Monitoring Layer operational
-Phase 5 — Analytical Modeling in progress
+Operational
+Documented
+Repository Audited
+Ready for Database Integration
 ```
 
 ---
 
-## Future Roadmap
+## Next Phases
 
-* Curated datasets
-* Analytical modeling
-* Database integration
-* Analytics Engineering concepts
-* Automation and deployment
+### Phase 6 — Database Integration
+
+* SQLite
+* PostgreSQL
+* SQL Transformations
+* Incremental Processing
+
+### Phase 7 — Analytics Engineering
+
+* Data Contracts
+* Data Lineage
+* dbt Concepts
+* Expanded Automated Testing
+
+### Phase 8 — Production & Automation
+
+* Scheduled Executions
+* Monitoring
+* Deployment Automation
+* Cloud Integration
+
+## License
+
+This project is licensed under the MIT License.

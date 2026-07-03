@@ -297,7 +297,7 @@ These capabilities are planned for future roadmap phases.
 Current version:
 
 ```text
-v1.3 — Analytical Modeling Foundation
+v1.4 — Public Release Readiness
 ```
 
 Status:
@@ -306,7 +306,7 @@ Status:
 Operational
 Documented
 Repository Audited
-Ready for Database Integration
+Ready for public portfolio use
 ```
 
 ---

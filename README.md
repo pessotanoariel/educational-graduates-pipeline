@@ -297,7 +297,7 @@ Estas capacidades forman parte de futuras fases del roadmap.
 Versión actual:
 
 ```text
-v1.3 — Analytical Modeling Foundation
+v1.4 — Public Release Readiness
 ```
 
 Estado:
@@ -306,7 +306,7 @@ Estado:
 Operativo
 Documentado
 Auditado para publicación
-Preparado para evolución hacia Database Integration
+Listo para uso y evolución futura
 ```
 
 ---
